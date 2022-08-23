@@ -1,0 +1,11 @@
+.idea
+.gradle
+build
+out
+venv
+__pycache__
+dist
+makeijan_client.egg-info
+test-results
+.pytest_cache
+.env
