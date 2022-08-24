@@ -23,21 +23,22 @@ Method | HTTP request | Description
 Delete a model
 
 ### Example
+
 ```python
 from __future__ import print_function
 import time
-import makeijan_client
-from makeijan_client.rest import ApiException
+import devo_model_manager_client
+from devo_model_manager_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 name = 'name_example' # str | 
 
@@ -77,21 +78,22 @@ void (empty response body)
 List available models filtered by domain
 
 ### Example
+
 ```python
 from __future__ import print_function
 import time
-import makeijan_client
-from makeijan_client.rest import ApiException
+import devo_model_manager_client
+from devo_model_manager_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 
 try:
@@ -130,21 +132,22 @@ Name | Type | Description  | Notes
 List all models that are children of the passed model
 
 ### Example
+
 ```python
 from __future__ import print_function
 import time
-import makeijan_client
-from makeijan_client.rest import ApiException
+import devo_model_manager_client
+from devo_model_manager_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 name = 'name_example' # str | 
 
@@ -185,21 +188,22 @@ Name | Type | Description  | Notes
 Display detailed information about a model
 
 ### Example
+
 ```python
 from __future__ import print_function
 import time
-import makeijan_client
-from makeijan_client.rest import ApiException
+import devo_model_manager_client
+from devo_model_manager_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 name = 'name_example' # str | 
 
@@ -240,21 +244,22 @@ Name | Type | Description  | Notes
 Display detailed information about a model without including the image binary
 
 ### Example
+
 ```python
 from __future__ import print_function
 import time
-import makeijan_client
-from makeijan_client.rest import ApiException
+import devo_model_manager_client
+from devo_model_manager_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 name = 'name_example' # str | 
 
@@ -295,21 +300,22 @@ Name | Type | Description  | Notes
 Finds models in a given domain filtered by given parameters
 
 ### Example
+
 ```python
 from __future__ import print_function
 import time
-import makeijan_client
-from makeijan_client.rest import ApiException
+import devo_model_manager_client
+from devo_model_manager_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 name = 'name_example' # str |  (optional)
 engine = 'engine_example' # str |  (optional)
@@ -352,21 +358,22 @@ Name | Type | Description  | Notes
 Get the binary image of a model
 
 ### Example
+
 ```python
 from __future__ import print_function
 import time
-import makeijan_client
-from makeijan_client.rest import ApiException
+import devo_model_manager_client
+from devo_model_manager_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 name = 'name_example' # str | 
 
@@ -407,21 +414,22 @@ Name | Type | Description  | Notes
 Finds models updated after the given date on every domain
 
 ### Example
+
 ```python
 from __future__ import print_function
 import time
-import makeijan_client
-from makeijan_client.rest import ApiException
+import devo_model_manager_client
+from devo_model_manager_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 newerthan = 789 # int | 
 
 try:
@@ -460,23 +468,24 @@ Name | Type | Description  | Notes
 Save a model
 
 ### Example
+
 ```python
 from __future__ import print_function
 import time
-import makeijan_client
-from makeijan_client.rest import ApiException
+import devo_model_manager_client
+from devo_model_manager_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
-body = makeijan_client.ModelDetail() # ModelDetail |  (optional)
+body = devo_model_manager_client.ModelDetail() # ModelDetail |  (optional)
 
 try:
     api_instance.save_model(domain_name, body=body)
@@ -514,21 +523,22 @@ void (empty response body)
 Upload the binary image of a model
 
 ### Example
+
 ```python
 from __future__ import print_function
 import time
-import makeijan_client
-from makeijan_client.rest import ApiException
+import devo_model_manager_client
+from devo_model_manager_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 engine = 'engine_example' # str |  (optional)
 file_name = 'file_name_example' # str |  (optional)

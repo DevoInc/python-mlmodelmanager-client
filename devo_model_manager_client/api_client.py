@@ -22,9 +22,9 @@ import tempfile
 import six
 from six.moves.urllib.parse import quote
 
-from makeijan_client.configuration import Configuration
-import makeijan_client.models
-from makeijan_client import rest
+from devo_model_manager_client.configuration import Configuration
+import devo_model_manager_client.models
+from devo_model_manager_client import rest
 
 
 class ApiClient(object):
@@ -257,7 +257,7 @@ class ApiClient(object):
             if klass in self.NATIVE_TYPES_MAPPING:
                 klass = self.NATIVE_TYPES_MAPPING[klass]
             else:
-                klass = getattr(makeijan_client.models, klass)
+                klass = getattr(devo_model_manager_client.models, klass)
 
         if klass in self.PRIMITIVE_TYPES:
             return self.__deserialize_primitive(data, klass)

@@ -14,9 +14,9 @@ import pprint
 import re  # noqa: F401
 
 import six
-from makeijan_client.models.cluster import Cluster  # noqa: F401,E501
-from makeijan_client.models.field import Field  # noqa: F401,E501
-from makeijan_client.models.image import Image  # noqa: F401,E501
+from devo_model_manager_client.models.cluster import Cluster  # noqa: F401,E501
+from devo_model_manager_client.models.field import Field  # noqa: F401,E501
+from devo_model_manager_client.models.image import Image  # noqa: F401,E501
 
 
 class ModelDetail(object):

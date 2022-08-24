@@ -2,8 +2,8 @@ from pathlib import Path
 import configparser
 
 from deprecated import deprecated
-from makeijan_client import Configuration, ModelDetail, Image, ApiClient
-from makeijan_client.api.default_api import DefaultApi
+from devo_model_manager_client import Configuration, ModelDetail, Image, ApiClient
+from devo_model_manager_client.api.default_api import DefaultApi
 
 
 @deprecated(version='1.2.1', reason="Please use model_server instead")

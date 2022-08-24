@@ -3,7 +3,7 @@ import hmac
 import json
 import time
 
-from makeijan_client import ApiClient
+from devo_model_manager_client import ApiClient
 
 
 class ApiClientHMACAuth(ApiClient):

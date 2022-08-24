@@ -5,8 +5,8 @@ from pathlib import Path
 import configparser
 from typing import Optional
 
-from makeijan_client import Configuration, ModelDetail, Image, ApiClient
-from makeijan_client.api.default_api import DefaultApi
+from devo_model_manager_client import Configuration, ModelDetail, Image, ApiClient
+from devo_model_manager_client.api.default_api import DefaultApi
 
 DEFAULT_CREDENTIALS_PATH = \
     (Path.home() / '.devo_credentials').expanduser().resolve()

@@ -27,8 +27,9 @@ pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
 (you may need to run `pip` with root permission: `sudo pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git`)
 
 Then import the package:
+
 ```python
-import makeijan_client 
+import devo_model_manager_client 
 ```
 
 ### Setuptools
@@ -41,8 +42,9 @@ python setup.py install --user
 (or `sudo python setup.py install` to install the package for all users)
 
 Then import the package:
+
 ```python
-import makeijan_client
+import devo_model_manager_client
 ```
 
 ### Versioning
@@ -67,18 +69,18 @@ Please follow the [installation procedure](#installation--usage) and then run th
 ```python
 from __future__ import print_function
 import time
-import makeijan_client
-from makeijan_client.rest import ApiException
+import devo_model_manager_client
+from devo_model_manager_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 name = 'name_example' # str | 
 
@@ -88,13 +90,13 @@ except ApiException as e:
     print("Exception when calling DefaultApi->delete_model_by_id: %s\n" % e)
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 
 try:
@@ -104,13 +106,13 @@ except ApiException as e:
     print("Exception when calling DefaultApi->find_all: %s\n" % e)
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 name = 'name_example' # str | 
 
@@ -121,13 +123,13 @@ except ApiException as e:
     print("Exception when calling DefaultApi->find_all_children: %s\n" % e)
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 name = 'name_example' # str | 
 
@@ -138,13 +140,13 @@ except ApiException as e:
     print("Exception when calling DefaultApi->find_by_name: %s\n" % e)
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 name = 'name_example' # str | 
 
@@ -155,13 +157,13 @@ except ApiException as e:
     print("Exception when calling DefaultApi->find_by_name_fast: %s\n" % e)
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 name = 'name_example' # str |  (optional)
 engine = 'engine_example' # str |  (optional)
@@ -173,13 +175,13 @@ except ApiException as e:
     print("Exception when calling DefaultApi->find_filtered: %s\n" % e)
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 name = 'name_example' # str | 
 
@@ -190,13 +192,13 @@ except ApiException as e:
     print("Exception when calling DefaultApi->find_image: %s\n" % e)
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 newerthan = 789 # int | 
 
 try:
@@ -206,7 +208,7 @@ except ApiException as e:
     print("Exception when calling DefaultApi->find_newer_than: %s\n" % e)
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 email = 'email_example' # str |  (optional)
 domain = 'domain_example' # str |  (optional)
 password = 'password_example' # str |  (optional)
@@ -218,7 +220,7 @@ except ApiException as e:
     print("Exception when calling DefaultApi->login: %s\n" % e)
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 
 try:
     api_response = api_instance.logout()
@@ -227,15 +229,15 @@ except ApiException as e:
     print("Exception when calling DefaultApi->logout: %s\n" % e)
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
-body = makeijan_client.ModelDetail() # ModelDetail |  (optional)
+body = devo_model_manager_client.ModelDetail() # ModelDetail |  (optional)
 
 try:
     api_instance.save_model(domain_name, body=body)
@@ -243,13 +245,13 @@ except ApiException as e:
     print("Exception when calling DefaultApi->save_model: %s\n" % e)
 
 # Configure API key authorization: standAloneToken
-configuration = makeijan_client.Configuration()
+configuration = devo_model_manager_client.Configuration()
 configuration.api_key['standAloneToken'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['standAloneToken'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = makeijan_client.DefaultApi(makeijan_client.ApiClient(configuration))
+api_instance = devo_model_manager_client.DefaultApi(devo_model_manager_client.ApiClient(configuration))
 domain_name = 'domain_name_example' # str | 
 engine = 'engine_example' # str |  (optional)
 file_name = 'file_name_example' # str |  (optional)
