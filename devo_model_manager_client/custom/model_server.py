@@ -102,8 +102,9 @@ class ModelServer(object):
 
     def _read_profile(self):
         """
-        Read makeijan credentials from a external config file
-        if they are not already provided by the constructor.
+        Read devo-model-manager credentials from a external
+        config file if they are not already provided by the
+        constructor.
         Use the parameter `profile` to specify which set of
         credentials to use.
         """

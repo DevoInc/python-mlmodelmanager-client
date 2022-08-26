@@ -3,7 +3,7 @@
 # flake8: noqa
 
 """
-    Makeijan API
+    Devo Model Manager API
 
     Devo API for machine learning  # noqa: E501
 

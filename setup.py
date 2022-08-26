@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Makeijan API
+    Devo Model Manager API
 
     Devo API for machine learning  # noqa: E501
 
@@ -26,10 +26,10 @@ REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil"]
 setup(
     name=NAME,
     version=VERSION,
-    description="Makeijan API",
+    description="Devo Model Manager API",
     author_email="machine.learning@devo.com",
     url="",
-    keywords=["Swagger", "Makeijan API"],
+    keywords=["Swagger", "Devo Model Manager API"],
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test*"]),
     include_package_data=True,

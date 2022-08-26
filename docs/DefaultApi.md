@@ -1,4 +1,4 @@
-# makeijan_client.DefaultApi
+# devo_model_manager_client.DefaultApi
 
 All URIs are relative to *http://{host}:{port}/*
 

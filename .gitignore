@@ -5,7 +5,7 @@ out
 venv
 __pycache__
 dist
-makeijan_client.egg-info
+devo_model_manager_client.egg-info
 test-results
 .pytest_cache
 .env
