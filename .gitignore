@@ -1,0 +1,11 @@
+.idea
+.gradle
+build
+out
+venv
+__pycache__
+dist
+devo_model_manager_client.egg-info
+test-results
+.pytest_cache
+.env
