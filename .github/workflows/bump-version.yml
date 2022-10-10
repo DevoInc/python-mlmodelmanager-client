@@ -59,7 +59,8 @@ jobs:
       run: |
         bump2version major
         echo "SKIPBUMP=TRUE" >> $GITHUB_ENV
-      if: "startsWith(github.event.head_commit.message, '[MAJOR]')"
+      if: "startsWith(github.event.head_commit.message, 'MAJOR') || 
+          startsWith(github.event.head_commit.message, 'BREAK')"
 
     - name: Bump Minor Version
       env:
@@ -67,7 +68,8 @@ jobs:
       run: |
         bump2version minor
         echo "SKIPBUMP=TRUE" >> $GITHUB_ENV
-      if: "startsWith(github.event.head_commit.message, '[FEATURE]')"
+      if: "startsWith(github.event.head_commit.message, 'MINOR') || 
+          startsWith(github.event.head_commit.message, 'FEAT')"
 
     # Default action
     - name: Bump Patch Version
