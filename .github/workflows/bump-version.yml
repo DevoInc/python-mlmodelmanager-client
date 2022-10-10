@@ -3,21 +3,15 @@
 
 # taken and upgraded from:
 # https://github.com/haddocking/pdb-tools/blob/f019d163d8f8cc5a0cba288e02f5a63a969719f6/.github/workflows/bump-version-on-push.yml
-name: Bump version
+name: Bump version (not main)
 
-# Bump version only when closed Pull Requests to main
-on:
-  pull_request:
-    branches:
-      - main
-    types: [closed]
+on: [push]
 
 jobs:
   bump-version:
 
     runs-on: ubuntu-latest
-    if: "github.event.pull_request.merged == true &&
-        !startsWith(github.head_ref, 'SKIP')"
+    if: "!startsWith(github.event.head_commit.message, '[SKIP]')"
 
     steps:
 
@@ -40,12 +34,12 @@ jobs:
       env:
         GH_USER: ${{ github.actor }}
         GH_TOKEN: ${{ github.token }}
-        PR_TARGET_BRANCH: ${{ github.base_ref }}
+        COMMIT_MSG: ${{ github.event.head_commit.message }}
       run: |
         git config user.name "${GH_USER}"
         git config user.email "${GH_USER}@users.noreply.github.com"
         git remote set-url origin https://x-access-token:${{ github.token }}@github.com/$GITHUB_REPOSITORY
-        git checkout "${PR_TARGET_BRANCH}"
+        git checkout "${GITHUB_REF:11}"
 
     - name: Setup env variables
       run: |
@@ -61,26 +55,24 @@ jobs:
     # incompatibility. Yet I like it to be integrated in the CI
     - name: Bump Major Version
       env:
-        PR_SOURCE_BRANCH: ${{ github.head_ref }}
+        COMMIT_MSG: ${{ github.event.head_commit.message }}
       run: |
         bump2version major
         echo "SKIPBUMP=TRUE" >> $GITHUB_ENV
-      if: "startsWith(github.head_ref, 'MAJOR') || 
-          startsWith(github.head_ref, 'BREAK')"
+      if: "startsWith(github.event.head_commit.message, '[MAJOR]')"
 
     - name: Bump Minor Version
       env:
-        PR_SOURCE_BRANCH: ${{ github.head_ref }}
+        COMMIT_MSG: ${{ github.event.head_commit.message }}
       run: |
         bump2version minor
         echo "SKIPBUMP=TRUE" >> $GITHUB_ENV
-      if: "startsWith(github.head_ref, 'MINOR') || 
-          startsWith(github.head_ref, 'FEAT')"
+      if: "startsWith(github.event.head_commit.message, '[FEATURE]')"
 
     # Default action
     - name: Bump Patch Version
       env:
-        PR_SOURCE_BRANCH: ${{ github.head_ref }}
+        COMMIT_MSG: ${{ github.event.head_commit.message }}
       run: |
         bump2version patch
       if: env.SKIPBUMP == 'FALSE'
