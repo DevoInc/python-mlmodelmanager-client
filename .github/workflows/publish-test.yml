@@ -5,15 +5,19 @@
 # condiciones de servicio, políticas de privacidad y documentación de soporte
 # documentación.
 
-name: Upload Python Package (Pypi)
+name: Publish Python Package to TestPypi
 
+# Publish only to TestPypi after bumping version (when closed Pull Requests to main)
 on:
-  release:
-    types: [published]
+  workflow_run:
+    workflows: ["Bump version"]
+    types:
+      - completed
 
 jobs:
-  deploy:
+  deploy-testpypi:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
@@ -26,8 +30,8 @@ jobs:
           pip install build
       - name: Build package
         run: python -m build
-      - name: Publish a Python distribution to PyPI
-        uses: pypa/gh-action-pypi-publish@v1
+      - name: Publish a Python distribution to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          user: ${{ secrets.PYPI_USER }}
-          password: ${{ secrets.PYPI_PASSWORD }}
+          password: ${{ secrets.PYPI_TEST_API_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/

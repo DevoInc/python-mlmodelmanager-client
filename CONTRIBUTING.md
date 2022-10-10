@@ -1,5 +1,7 @@
 # Contributing
 
+If someone is contributing to any Devo open source repository (internal or external), a Contributor License Agreement should be signed: https://cla-assistant.io/DevoInc/
+
 ## Development
 
 This package is built and managed using Poetry. It can be downloaded and installed following the guides here [Python-Poetry.org](https://python-poetry.org/).
