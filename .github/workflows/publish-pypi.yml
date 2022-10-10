@@ -5,18 +5,16 @@
 # condiciones de servicio, políticas de privacidad y documentación de soporte
 # documentación.
 
-name: Upload release-candidate Python Package (TestPypi)
+name: Publish Python Package to Pypi
 
+# Publish only to Pypi when manually generated a release from github
 on:
-  pull_request:
-    branches:
-      - main
-    types: [closed]
+  release:
+    types: [published]
 
 jobs:
-  release-candidate:
+  deploy:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
@@ -29,9 +27,7 @@ jobs:
           pip install build
       - name: Build package
         run: python -m build
-      - name: Publish a Python distribution to TestPyPI
-        uses: pypa/gh-action-pypi-publish@v1
+      - name: Publish a Python distribution to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          user: ${{ secrets.PYPI_USER }}
-          password: ${{ secrets.PYPI_PASSWORD }}
-          repository_url: https://test.pypi.org/legacy/
+          password: ${{ secrets.PYPI_API_TOKEN }}
