@@ -54,4 +54,4 @@ jobs:
       #              run test suite
       #----------------------------------------------
       - name: Run tests
-        run: tox
+        run: poetry run tox
