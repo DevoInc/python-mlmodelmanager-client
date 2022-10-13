@@ -5,9 +5,10 @@
 # condiciones de servicio, políticas de privacidad y documentación de soporte
 # documentación.
 
+# Publish only to Pypi
 name: Publish Python Package to Pypi
 
-# Publish only to Pypi when manually generated a release from github
+# When manually generated a release from github
 on:
   release:
     types: [published]

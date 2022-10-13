@@ -5,9 +5,10 @@
 # condiciones de servicio, políticas de privacidad y documentación de soporte
 # documentación.
 
+# Publish only to TestPypi
 name: Publish Python Package to TestPypi
 
-# Publish only to TestPypi after bumping version (when closed Pull Requests to main)
+# After bumping version (when closed Pull Requests to main) and tests are passed
 on:
   workflow_run:
     workflows: ["Bump version", "Test with tox"]
