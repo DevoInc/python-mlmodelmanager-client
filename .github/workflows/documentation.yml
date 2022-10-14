@@ -1,6 +1,6 @@
 # Source: https://coderefinery.github.io/documentation/gh_workflow/
 
-# Publish documentation to: https://DevoInc.github.io/python-mlmodelmanager-client/
+# Publish documentation to: https://devoinc.github.io/python-mlmodelmanager-client/
 name: Docs
 
 # After bumping version (when closed Pull Requests to main) and tests are passed
