@@ -5,9 +5,10 @@
 # condiciones de servicio, políticas de privacidad y documentación de soporte
 # documentación.
 
+# Publish only to Pypi
 name: Publish Python Package to Pypi
 
-# Publish only to Pypi when manually generated a release from github
+# When manually generated a release from github
 on:
   release:
     types: [published]
@@ -24,9 +25,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install build
+          pip install poetry
       - name: Build package
-        run: python -m build
+        run: poetry build
       - name: Publish a Python distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
