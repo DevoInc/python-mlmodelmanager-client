@@ -20,7 +20,7 @@ def test_add_non_existing_model(
         engines.IDA,
         abs_path("./data/test.zip")
     )
-    assert response == image_metadata
+    assert response is None
 
 
 def test_add_existing_model_without_force(client, abs_path, mock_get_model):
@@ -51,7 +51,7 @@ def test_add_existing_model_with_force(
         abs_path("./data/test.zip"),
         force=True
     )
-    assert response == image_metadata
+    assert response is None
 
 
 def test_add_model_with_invalid_engine(

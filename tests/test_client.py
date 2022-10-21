@@ -1,3 +1,5 @@
+import os.path
+
 import pytest
 
 from devo_ml.modelmanager import auth
@@ -44,3 +46,5 @@ def test_create_client_from_profile(abs_path):
         path=abs_path("./profiles/modelmanager.ini")
     )
     assert client.url == "https://localhost"
+    assert client.api.auth.token == "testing_token"
+    assert client.downloader.path == os.path.expanduser("~/models")

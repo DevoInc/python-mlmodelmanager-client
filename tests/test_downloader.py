@@ -47,3 +47,10 @@ def test_file_system_downloader_with_invalid_model(encoded_image, tmp_path):
 def test_file_system_downloader_set_absolute_path():
     downloader = FileSystemDownloader("foo")
     assert os.path.isabs(downloader.path)
+
+
+def test_get_image_bytes_with_no_image():
+    with pytest.raises(ValueError):
+        get_image_bytes({"foo": "bar"})
+    with pytest.raises(ValueError):
+        get_image_bytes({})

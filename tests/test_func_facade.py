@@ -4,7 +4,13 @@ import os
 
 from devo_ml.modelmanager import engines
 from devo_ml.modelmanager import error
-from devo_ml.modelmanager import get_model, find_model, add_model
+from devo_ml.modelmanager import get_models, get_model, find_model, add_model
+
+
+def test_get_models(mock_get_models):
+    mock_get_models(response=[])
+    response = get_models("http://localhost", "token")
+    assert response == []
 
 
 @pytest.mark.parametrize("func", [get_model, find_model])
@@ -52,7 +58,7 @@ def test_get_non_existing_model(mock_get_model):
         get_model("http://localhost", "token", "model_name")
 
 
-def test_get_or_find_non_existing_model(mock_get_model):
+def test_find_non_existing_model(mock_get_model):
     mock_get_model("model_name", code=204)
     model = find_model("http://localhost", "token", "model_name")
     assert model is None
@@ -105,7 +111,7 @@ def test_add_non_existing_model(
         engines.IDA,
         abs_path("data/test.zip")
     )
-    assert response == image_metadata
+    assert response is None
 
 
 def test_add_existing_model_without_force(abs_path, mock_get_model):
@@ -143,7 +149,7 @@ def test_add_existing_model_with_force(
         abs_path("data/test.zip"),
         force=True
     )
-    assert response == image_metadata
+    assert response is None
 
 
 def test_add_model_with_invalid_engine(

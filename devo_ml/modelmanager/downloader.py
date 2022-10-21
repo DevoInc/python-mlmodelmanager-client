@@ -1,5 +1,8 @@
+"""A downloader to save files in a file system."""
+
 from __future__ import annotations
 
+import abc
 import base64
 import os
 
@@ -9,6 +12,7 @@ from typing import Callable
 from .engines import get_default_engine_extension
 
 
+#: Signature type for callable downloaders.
 DownloaderCallable = Callable[[dict], str]
 
 
@@ -16,21 +20,18 @@ def get_default_downloader() -> Downloader:
     """Returns the default downloader used.
 
     :return: The default downloader
-    :rtype: Downloader
     """
     return FileSystemDownloader(".")
 
 
 def get_image_bytes(image: dict) -> bytes:
-    """Get the bytes of an image.
+    """Gets the bytes of an image.
 
     An image must have the `image` key with the base 64 encoded image.
 
     :param image: The image to get bytes
-    :type image: dict
-    :raises: ValueError: if no image key or image key is empty.
+    :raises ValueError: if no image key or image key is empty.
     :return: The bytes of the image
-    :rtype: bytes
     """
     encoded_image = image.get("image")
     if not encoded_image:
@@ -38,26 +39,46 @@ def get_image_bytes(image: dict) -> bytes:
     return base64.b64decode(encoded_image)
 
 
-class Downloader:
+class Downloader(abc.ABC):
     """An interface to downloaders.
 
-    Any downloader must be a callable with the `DownloaderCallable` signature,
-    receiving a model and returns an identification of the download of the
-    model as a string.
+    Any downloader must be a callable with the :const:`DownloaderCallable`
+    signature, receiving a model and returns an identification of the download
+    of the model as a string.
     """
 
+    @abc.abstractmethod
     def __call__(self, model: dict) -> str:
-        raise NotImplementedError("Downloader must be callable.")
+        """Subclasses must implement this method to client be able to
+        calling it as a function.
+
+        The representation of a model is a `dict` with this minimal shape:
+
+        .. code-block::
+
+            {
+                "name": <name>,
+                "engine": <a_valid_engine>,
+                "image": {
+                    "image": <base64_encoded_image>
+                    ...
+                }
+                ...
+            }
+
+        :param model: The model to download its file
+        :return: The identification of the download of the model
+        """
 
 
 class FileSystemDownloader(Downloader):
-    """A downloader capable of writing file of model to the file system.
-
-    :param path: The path where files will be written
-    :type path: str | Path
-    """
+    """A downloader capable of writing file of model to the file system."""
 
     def __init__(self, path: str | Path) -> None:
+        """Creates a :class:`FileSystemDownloader` object.
+
+        :param path: The path where files will be written
+        """
         self.path = os.path.abspath(os.path.expanduser(path))
 
     def __call__(self, model: dict) -> str:
@@ -69,12 +90,10 @@ class FileSystemDownloader(Downloader):
         there is no extension associated to the engine.
 
         :param model: The model to download its file
-        :type model: dict
-        :raises: ValueError: If model has invalid or empty keys for `name`,
+        :raises ValueError: If model has invalid or empty keys for `name`,
             `engine` or `image`
-        :raises: OSError: If there is a problem writing the file to path
+        :raises OSError: If there is a problem writing the file to path
         :return: The absolute path of file written
-        :rtype: str
         """
         name = model.get("name")
         engine = model.get("engine")

@@ -1,13 +1,13 @@
-from devo_ml.modelmanager.endpoint import EndpointRenderer
+from devo_ml.modelmanager.endpoint import LatestEndpointRenderer
 from devo_ml.modelmanager.endpoint import LegacyEndpointRenderer
 
 
 def test_endpoint_renderer():
-    endpoints = EndpointRenderer("http://localhost")
+    endpoints = LatestEndpointRenderer("http://localhost")
     assert endpoints.models() ==  "http://localhost/models"
     assert endpoints.model("foo") == "http://localhost/models/foo"
     assert endpoints.image_upload() == "http://localhost/models/images/upload"
-    endpoints = EndpointRenderer("http://localhost/")
+    endpoints = LatestEndpointRenderer("http://localhost/")
     assert endpoints.models() ==  "http://localhost/models"
     assert endpoints.model("foo") == "http://localhost/models/foo"
     assert endpoints.image_upload() == "http://localhost/models/images/upload"

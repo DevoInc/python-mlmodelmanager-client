@@ -4,7 +4,7 @@ import pytest
 import requests
 
 from devo_ml.modelmanager.auth import create_auth_from_token, STANDALONE
-from devo_ml.modelmanager.client import Client
+from devo_ml.modelmanager.client import Client, LegacyClient
 from devo_ml.modelmanager.downloader import Downloader
 
 
@@ -16,7 +16,7 @@ class MockDownloader(Downloader):
 @pytest.fixture
 def get_client():
     def _get_client(url, auth, downloader):
-        return Client(url, auth=auth, downloader=downloader)
+        return Client(url, auth, downloader=downloader)
     return _get_client
 
 
@@ -25,7 +25,25 @@ def client(get_client):
     token = "8a3vf98ai28sar1234lkj2l43td6f89a"
     return get_client(
         "http://localhost",
-        auth=create_auth_from_token(token, auth_type=STANDALONE),
+        create_auth_from_token(token, auth_type=STANDALONE),
+        downloader=MockDownloader()
+    )
+
+
+@pytest.fixture
+def get_legacy_client():
+    def _get_legacy_client(url, domain, auth, downloader):
+        return LegacyClient(url, domain, auth, downloader=downloader)
+    return _get_legacy_client
+
+
+@pytest.fixture
+def legacy_client(get_legacy_client):
+    token = "8a3vf98ai28sar1234lkj2l43td6f89a"
+    return get_legacy_client(
+        "http://localhost",
+        "self",
+        create_auth_from_token(token, auth_type=STANDALONE),
         downloader=MockDownloader()
     )
 
@@ -125,6 +143,14 @@ def abs_path():
             file_name
         )
     return _abs_path
+
+
+@pytest.fixture
+def mock_get_models(requests_mock):
+    def _mock_get_models(code=None, response=None):
+        url = "http://localhost/models"
+        requests_mock.get(url, status_code=code or 200, json=response)
+    return _mock_get_models
 
 
 @pytest.fixture

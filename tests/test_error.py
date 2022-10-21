@@ -7,6 +7,8 @@ from devo_ml.modelmanager import error
 def test_model_manager_error():
     e = error.ModelManagerError(code=1, msg="test_error")
     assert str(e) == "1: test_error"
+    e = error.ModelManagerError(msg="test_error")
+    assert str(e) == "test_error"
 
 
 @pytest.mark.parametrize("code,error_class", [

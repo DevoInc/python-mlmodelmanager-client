@@ -20,6 +20,9 @@ flake8 = "^5.0.4"
 coverage = "^6.4.4"
 requests-mock = "^1.10.0"
 tox = "^3.26.0"
+Sphinx = "^5.2.2"
+sphinx-rtd-dark-mode = "^1.2.4"
+sphinx-autodoc-typehints = "^1.19.4"
 
 [build-system]
 requires = ["poetry-core"]

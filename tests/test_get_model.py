@@ -4,6 +4,12 @@ from devo_ml.modelmanager import engines
 from devo_ml.modelmanager import error
 
 
+def test_get_models(client, mock_get_models):
+    mock_get_models(response=[])
+    response = client.get_models()
+    assert response == []
+
+
 def test_get_existing_model(client, mock_get_model):
     mock_get_model("name", response={"name": "name", "engine": engines.ONNX})
     response = client.get_model("name")
