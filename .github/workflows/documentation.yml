@@ -1,0 +1,31 @@
+# Source: https://coderefinery.github.io/documentation/gh_workflow/
+
+# Publish documentation to: https://devoinc.github.io/python-mlmodelmanager-client/
+name: Docs
+
+# After bumping version (when closed Pull Requests to main) and tests are passed
+on:
+  workflow_run:
+    workflows: ["Bump version", "Test with tox"]
+    types:
+      - completed
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install dependencies
+        run: |
+          pip install sphinx sphinx_rtd_dark_mode
+      - name: Sphinx build
+        run: |
+          sphinx-build docs/source _build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _build/
+          force_orphan: true
