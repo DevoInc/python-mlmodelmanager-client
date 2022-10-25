@@ -3,7 +3,7 @@ Functions Facade
 
 It is possible to manage the models of a ML Model Manager server trough
 functions rather than trough an object
-:class:`Client <devo_ml.modelmanager.client.Client>`.
+:class:`Client <devo_ml.modelmanager.Client>`.
 
 The library provides a set of functions that expose the same interface as the
 client object and allow operations to be performed in a single call.
@@ -11,8 +11,8 @@ client object and allow operations to be performed in a single call.
 Let’s overview the functions.
 
 
-:func:`add_model(...) <devo_ml.modelmanager.func_facade.add_model>`
--------------------------------------------------------------------
+:func:`add_model(...) <devo_ml.modelmanager.add_model>`
+-------------------------------------------------------
 
 Allows you to create a model.
 
@@ -37,8 +37,8 @@ error will be thrown.
 Trough the `force` parameter you can mange whether to override the model.
 
 
-:func:`get_model(...) <devo_ml.modelmanager.func_facade.get_model>`
--------------------------------------------------------------------
+:func:`get_model(...) <devo_ml.modelmanager.get_model>`
+-------------------------------------------------------
 
 Allows you to retrieve model.
 
@@ -71,8 +71,8 @@ If the model you are trying to query does not exists, a
 error will be thrown.
 
 
-:func:`find_model(...) <devo_ml.modelmanager.func_facade.find_model>`
----------------------------------------------------------------------
+:func:`find_model(...) <devo_ml.modelmanager.find_model>`
+---------------------------------------------------------
 
 It behaves the same as `get_model(...)` except it returns ``None`` instead of
 throw an error if the model doesn't exists. It is a convenient way to get the
@@ -98,8 +98,8 @@ model data without the need of catching errors.
     >>>
 
 
-:func:`get_models(...) <devo_ml.modelmanager.func_facade.get_models>`
----------------------------------------------------------------------
+:func:`get_models(...) <devo_ml.modelmanager.get_models>`
+---------------------------------------------------------
 
 Allows you retrieve a list of all the models in the system. Note that it doesn't
 allow downloading model files.

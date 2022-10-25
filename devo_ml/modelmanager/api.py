@@ -51,7 +51,7 @@ def validate_or_raise_error(status_code: int, response: Any) -> None:
 
 
 class Api:
-    """Low level api calls based on :doc:`Requests <requests:index>` library."""
+    """Low level api calls based on :doc:`Requests <requests:index>` lib."""
 
     def __init__(self, auth: AuthCallable = None, **kwargs):
         """Creates a :class:`Api`.
@@ -89,14 +89,15 @@ class Api:
         return decoded_response
 
     def request(self, endpoint: str, **kwargs) -> requests.Response:
-        """Wraps a requests call to catch any error in
-        :exc:`ModelManagerError <devo_ml.modelmanager.error.ModelManagerError>`.
+        """Wraps a requests call to catch any error in :exc:`ModelManagerError
+        <devo_ml.modelmanager.error.ModelManagerError>`.
 
         :param endpoint: The endpoint to request
         :param kwargs: Custom options to the underlying requests for this
-            request. Will be merged with the options of the :class:`Api` object.
-        :raises ModelManagerError:
-            if any :exc:`RequestException <requests.exceptions.RequestException>`.
+            request. Will be merged with the options of the :class:`Api`
+            object.
+        :raises ModelManagerError: if any
+            :exc:`RequestException <requests.exceptions.RequestException>`.
         :return: Request response
         """
         try:

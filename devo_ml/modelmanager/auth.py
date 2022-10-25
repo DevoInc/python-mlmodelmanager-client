@@ -62,7 +62,8 @@ class HttpDevoTokenAuth(abc.ABC):
     ML Model Manager.
 
     The implementations of this class are objects ready to use by the client to
-    authenticate and also by :doc:`Requests <requests:user/authentication>` library.
+    authenticate and also by :doc:`Requests <requests:user/authentication>`
+    library.
     """
 
     def __init__(self, token: str) -> None:

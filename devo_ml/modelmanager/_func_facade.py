@@ -1,11 +1,8 @@
-"""A set of functions for those who like a functional rather than an
-object-oriented approach."""
-
 from __future__ import annotations
 
 from typing import Optional, List
 
-from .client_factory import create_client_from_token
+from ._client_factory import create_client_from_token
 
 
 def get_models(
@@ -19,7 +16,8 @@ def get_models(
     :param url: The URL of the server. Must be valid
     :param token: The token to authenticate
     :param auth_type: The type of the authentication,
-        :func:`get_default_auth_type <devo_ml.modelmanager.auth.get_default_auth_type>`
+        :func:`get_default_auth_type
+        <devo_ml.modelmanager.auth.get_default_auth_type>`
         is used if it is not provided
     :param kwargs: Options to the underlying requests
     :return: The list of the models
@@ -46,7 +44,8 @@ def get_model(
     :param token: The token to authenticate
     :param name: The name of the model
     :param auth_type: The type of the authentication,
-        :func:`get_default_auth_type <devo_ml.modelmanager.auth.get_default_auth_type>`
+        :func:`get_default_auth_type
+        <devo_ml.modelmanager.auth.get_default_auth_type>`
         is used if it is not provided
     :param download_path:
     :param kwargs: Options to the underlying requests
@@ -76,7 +75,8 @@ def find_model(
     :param token: The token to authenticate
     :param name: The name of the model
     :param auth_type: The type of the authentication,
-        :func:`get_default_auth_type <devo_ml.modelmanager.auth.get_default_auth_type>`
+        :func:`get_default_auth_type
+        <devo_ml.modelmanager.auth.get_default_auth_type>`
         is used if it is not provided
     :param download_path:
     :param kwargs: Options to the underlying requests
@@ -111,7 +111,8 @@ def add_model(
     :param model_file: The path of the file of the model
     :param description: The description of the model
     :param auth_type: The type of the authentication,
-        :func:`get_default_auth_type <devo_ml.modelmanager.auth.get_default_auth_type>`
+        :func:`get_default_auth_type
+        <devo_ml.modelmanager.auth.get_default_auth_type>`
         is used if it is not provided
     :param force: Whether to override the model if already exist
     :param kwargs: Options to the underlying requests

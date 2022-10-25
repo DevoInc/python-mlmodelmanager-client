@@ -1,7 +1,5 @@
-"""A set of convenient client factories."""
-
 from .auth import create_auth_from_token, get_default_auth_type
-from .client import Client
+from ._client import Client
 from .downloader import FileSystemDownloader
 from .profile import read_profile_from_file
 
@@ -22,7 +20,8 @@ def create_client_from_token(
     :param auth_type: The type of authentication to use;
         :const:`STANDALONE <devo_ml.modelmanager.auth.STANDALONE>` or
         :const:`BEARER <devo_ml.manager.auth.BEARER>`.
-        :func:`get_default_auth_type() <devo_ml.manager.auth.get_default_auth_type>`
+        :func:`get_default_auth_type()
+        <devo_ml.manager.auth.get_default_auth_type>`
         is used if is not provided
     :param download_path: The path where model files will be downloaded. The
         current directory ``.`` is used if not provided.

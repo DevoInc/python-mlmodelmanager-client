@@ -11,7 +11,7 @@ name: Publish Python Package to TestPypi
 # After bumping version (when closed Pull Requests to main) and tests are passed
 on:
   workflow_run:
-    workflows: ["Bump version", "Test with tox"]
+    workflows: ["Bump version"]
     types:
       - completed
 

@@ -1,8 +1,6 @@
 Client Object
 =============
 
-.. module:: devo_ml.modelmanager
-
 This section explains how to use a client to manage the models of a ML Model
 Manager server.
 
@@ -10,7 +8,7 @@ Manager server.
 Create
 ------
 
-To use a :class:`Client <client.Client>` you need the URL of the
+To use a :class:`Client <devo_ml.modelmanager.Client>` you need the URL of the
 ML Model Manager server and an authentication based on a token.
 
 .. code-block::
@@ -21,10 +19,10 @@ ML Model Manager server and an authentication based on a token.
     >>> auth = HttpDevoStandAloneTokenAuth("8a3vf98ai28sar1234lkj2l43td6f89a")
     >>> client = Client("http://localhost", auth)
     >>> client
-    <devo_ml.modelmanager.client.Client object at 0x7fa773450490>
+    <devo_ml.modelmanager._client.Client object at 0x7fa773450490>
 
-Now you have a :class:`Client <client.Client>` ready to use to manage models
-of the server `http://localhost`.
+Now you have a :class:`Client <devo_ml.modelmanager.Client>` ready to use to
+manage models of the server `http://localhost`.
 
 .. warning::
 
@@ -92,8 +90,8 @@ The most frequent operation a data scientist will do with the client is
 probably to add theirs models once they have been implemented, optimized,
 trained, validated...
 
-:meth:`Client.add_model <client.Client.add_model>` allows you to create new
-models.
+:meth:`Client.add_model <devo_ml.modelmanager.Client.add_model>` allows you to
+create new models.
 
 Parameters:
 
@@ -114,7 +112,8 @@ Parameters:
     >>>
 
 If the model you are trying to add already exists in the system, a
-:exc:`ModelAlreadyExists <error.ModelAlreadyExists>` error will be thrown.
+:exc:`ModelAlreadyExists <devo_ml.modelmanager.error.ModelAlreadyExists>` error
+will be thrown.
 
 .. code-block::
 
@@ -154,8 +153,8 @@ Querying Models
 
 Other operation that is usually of interest is to query the data of a model.
 
-:meth:`Client.get_model <client.Client.get_model>` allows you to query the data
-of an existing model.
+:meth:`Client.get_model <devo_ml.modelmanager.Client.get_model>` allows you to
+query the data of an existing model.
 
 Parameters:
 
@@ -175,7 +174,7 @@ Parameters:
     >>>
 
 If the model you are trying to query does not exists, a
-:exc:`ModelNotFound <error.ModelNotFound>` error will be thrown.
+:exc:`ModelNotFound <devo_ml.modelmanager.error.ModelNotFound>` error will be thrown.
 
 .. code-block::
 
@@ -195,10 +194,10 @@ the inner :ref:`downloader <Downloaders>` of the client.
     >>> client.get_model("pokemon_onnx_regression", download_file=True)
     ...
 
-:meth:`Client.find_model <client.Client.find_model>` is an alternative to get a
-model. It behaves the same as `get_model` except it returns ``None`` instead of
-throw an error if the model doesn't exists. It is a convenient way to get the
-model data without the need of catching errors.
+:meth:`Client.find_model <devo_ml.modelmanager.Client.find_model>` is an alternative
+to get a model. It behaves the same as `get_model` except it returns ``None``
+instead of throw an error if the model doesn't exists. It is a convenient way to
+get the model data without the need of catching errors.
 
 Parameters:
 
@@ -211,9 +210,9 @@ Parameters:
     >>>
 
 
-:meth:`Client.get_models <client.Client.get_models>` allows you retrieve a list
-of all the models in the system. Note that `get_models` doesn't allow
-downloading model files.
+:meth:`Client.get_models <devo_ml.modelmanager.Client.get_models>` allows you
+retrieve a list of all the models in the system. Note that `get_models` doesn't
+allow downloading model files.
 
 .. code-block::
 
@@ -241,9 +240,9 @@ Legacy Client
 -------------
 
 In order to access servers prio to ``2.4.0`` you must use the
-:class:`LegacyClient <client.LegacyClient>`. This is due to these servers can't
-inferred the domain from the access token, so we need to pass it in the
-constructor.
+:class:`LegacyClient <devo_ml.modelmanager.LegacyClient>`. This is due to these
+servers can't inferred the domain from the access token, so we need to pass it
+in the constructor.
 
 .. code-block::
 
@@ -253,24 +252,25 @@ constructor.
     >>> auth = HttpDevoStandAloneTokenAuth("8a3vf98ai28sar1234lkj2l43td6f89a")
     >>> client = LegacyClient("http://localhost", "self", auth)
     >>> client
-    <devo_ml.modelmanager.client.LegacyClient object at 0x7fa773450490>
+    <devo_ml.modelmanager._client.LegacyClient object at 0x7fa773450490>
 
 Note that we are connecting the client to the domain ``self`` not matter the
 domain referred by the token.
 
-All explained for the :class:`Client <client.Client>` is applicable to the
-:class:`LegacyClient <client.LegacyClient>`, both expose the same interface to
-the user in order to adding and querying models.
+All explained for the :class:`Client <devo_ml.modelmanager.Client>` is applicable
+to the :class:`LegacyClient <devo_ml.modelmanager.LegacyClient>`, both expose the
+same interface to the user in order to adding and querying models.
 
 How do I know which client to use?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you are not sure which client to use you can start by using the
-:class:`Client <client.Client>` and verify that you can get the models without
-errors. If a :exc:`ModelManagerError[404] <error.ModelManagerError>` is thrown
-it means that the server doesn't support the endpoints accessed by the client
-and you need to use the :class:`LegacyClient <client.LegacyClient>` passing in the
-target domain.
+:class:`Client <devo_ml.modelmanager.Client>` and verify that you can get the
+models without errors. If a
+:exc:`ModelManagerError[404] <devo_ml.modelmanager.error.ModelManagerError>` is
+thrown it means that the server doesn't support the endpoints accessed by the client
+and you need to use the :class:`LegacyClient <devo_ml.modelmanager.LegacyClient>`
+passing in the target domain.
 
 .. code-block::
 
@@ -302,10 +302,10 @@ step.
 Create Client From Token
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-This factory
-:func:`create_client_from_token <client_factory.create_client_from_token>`
-allows you to create a ready to use :class:`Client <client.Client>` when you
-have a valid access token.
+The factory
+:func:`create_client_from_token <devo_ml.modelmanager.create_client_from_token>`
+allows you to create a ready to use :class:`Client <devo_ml.modelmanager.Client>`
+when you have a valid access token.
 
 Instead of this:
 
@@ -325,22 +325,23 @@ You could do a cleaner one line code:
 
     >>> client = create_client_from_token("http://localhost", "8a3vf98ai28sar1234lkj2l43td6f89a")
 
-This creates a :class:`Client <client.Client>` to `http://localhost` with Devo's
-``standAloneToken`` token authentication.
+This creates a :class:`Client <devo_ml.modelmanager.Client>` to `http://localhost`
+with Devo's ``standAloneToken`` token authentication.
 
 You can set the type of authentication to use in the parameter `auth_type`.
 
-* ``standalone`` to use :class:`HttpDevoStandAloneTokenAuth <auth.HttpDevoStandAloneTokenAuth>` *(default)*.
-* ``bearer`` to use :class:`HttpDevoBearerTokenAuth <auth.HttpDevoBearerTokenAuth>`.
+* ``standalone`` to use :class:`HttpDevoStandAloneTokenAuth <devo_ml.modelmanager.auth.HttpDevoStandAloneTokenAuth>` *(default)*.
+* ``bearer`` to use :class:`HttpDevoBearerTokenAuth <devo_ml.modelmanager.auth.HttpDevoBearerTokenAuth>`.
 
 .. note::
 
-    You can use constants rather than literals; :const:`auth.STANDALONE` or
-    :const:`auth.BEARER`.
+    You can use constants rather than literals;
+    :const:`STANDALONE <devo_ml.modelmanager.auth.STANDALONE>` or
+    :const:`BEARER <devo_ml.modelmanager.auth.BEARER>`.
 
 The `download_path` parameter allows you to setup the client downloader, but
 note that you cannot use your own downloaders when creating clients with the
-factory. A :class:`FileSystemDownloader <downloader.FileSystemDownloader>`
+factory. A :class:`FileSystemDownloader <devo_ml.modelmanager.downloader.FileSystemDownloader>`
 is used as the downloader.
 
 You can also use keywords to tune the underlying request.
@@ -359,13 +360,12 @@ You can also use keywords to tune the underlying request.
     ... )
 
 Create Client From Profile
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This factory
-:func:`create_client_from_profile <client_factory.create_client_from_profile>`
-allows you to setup several client configurations in one place and instantiate
-one of those easily. It is useful when you have for example many environments
-you want to access.
+The factory
+:func:`create_client_from_profile <devo_ml.modelmanager.create_client_from_profile>`
+allows you to setup several client configurations in one place and instantiate one
+of those easily. It is useful when you have for example many environments you want to access.
 
 .. code-block::
 
@@ -373,9 +373,9 @@ you want to access.
 
     >>> client = create_client_from_profile("testing", path="profiles.ini")
 
-In this case we are telling the factory to create a :class:`Client <client.Client>`
-based on the profile `testing` located in the file `profiles.ini` of the current
-directory.
+In this case we are telling the factory to create a
+:class:`Client <devo_ml.modelmanager.Client>` based on the profile `testing`
+located in the file `profiles.ini` of the current directory.
 
 The parameter `path` not only accepts file names, it could be; a file name e.g.
 `profiles.ini`, a file path e.g. `~/ml/config/profiles.ini` or a path e.g:
@@ -440,7 +440,7 @@ You can setup as many profiles as you want as they are referrer by name.
 
 The `download_path` profile attribute allows you to setup the client downloader,
 but note that you cannot use your own downloaders when creating clients with the
-factory. A :class:`FileSystemDownloader <downloader.FileSystemDownloader>`
+factory. A :class:`FileSystemDownloader <devo_ml.modelmanager.downloader.FileSystemDownloader>`
 is used as the downloader.
 
 .. warning::

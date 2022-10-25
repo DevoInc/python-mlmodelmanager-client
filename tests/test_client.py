@@ -4,7 +4,7 @@ import pytest
 
 from devo_ml.modelmanager import auth
 from devo_ml.modelmanager.error import ModelManagerError
-from devo_ml.modelmanager import client_factory as factory
+from devo_ml.modelmanager import _client_factory as factory
 
 
 def test_network_error(client):

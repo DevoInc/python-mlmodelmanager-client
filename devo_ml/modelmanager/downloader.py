@@ -1,4 +1,4 @@
-"""A downloader to save files in a file system."""
+"""Available downloaders to store model files."""
 
 from __future__ import annotations
 
