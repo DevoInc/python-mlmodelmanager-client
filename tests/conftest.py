@@ -3,8 +3,8 @@ import os
 import pytest
 import requests
 
+from devo_ml.modelmanager import Client, LegacyClient
 from devo_ml.modelmanager.auth import create_auth_from_token, STANDALONE
-from devo_ml.modelmanager.client import Client, LegacyClient
 from devo_ml.modelmanager.downloader import Downloader
 
 

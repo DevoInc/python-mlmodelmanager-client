@@ -5,7 +5,8 @@ file extensions.
 from typing import Sequence
 
 
-#: | Constant denoting `Open Neural Network Exchange <https://onnx.ai/>`_ model.
+#: | Constant denoting `Open Neural Network Exchange <https://onnx.ai/>`_
+# model.
 #: | Extensions: ``.onnx``
 ONNX = "ONNX"
 

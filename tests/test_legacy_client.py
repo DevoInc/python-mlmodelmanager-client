@@ -1,6 +1,5 @@
 import pytest
 
-from devo_ml.modelmanager import auth
 from devo_ml.modelmanager.error import ModelManagerError
 
 

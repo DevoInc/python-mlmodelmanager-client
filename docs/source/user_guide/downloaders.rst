@@ -7,11 +7,10 @@ It is a callable of the type
 that receive a `model`, perform an action to store it and
 returns some kind of identification of the action performed.
 
-:class:`Downloader <devo_ml.modelmanager.downloader.Downloader>` is an
-interface to downloaders the enforce you that the instance of the class are
-callables the type
+:class:`Downloader <devo_ml.modelmanager.downloader.Downloader>` is an interface
+for downloaders that forces you to make instances of the class callable of type
 :const:`DownloaderCallable <devo_ml.modelmanager.downloader.DownloaderCallable>`.
-You need to implement the `__call__` method when inherit from it.
+You need to implement the `__call__` method when you inherit from it.
 
 
 File System Downloader

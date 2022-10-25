@@ -1,5 +1,3 @@
-"""The ways that endpoints of ML Model Manager can be render."""
-
 from __future__ import annotations
 
 import abc

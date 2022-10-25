@@ -6,9 +6,13 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+import importlib.metadata
+
+
 project = 'ML Model Manager'
 copyright = '2022, Devo ML Team'
 author = 'Devo ML Team'
+version = importlib.metadata.version("devo-mlmodelmanager")
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -20,7 +24,6 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.viewcode",
     "sphinx_autodoc_typehints",
-    "sphinx_rtd_dark_mode",
 ]
 
 templates_path = ['_templates']
@@ -31,13 +34,8 @@ add_module_names = False
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'furo'
 html_show_sourcelink = False
-html_theme_options = {
-    'style_nav_header_background': '#bfc607'
-}
-
-html_css_files = ["custom.css"]
 html_static_path = ['_static']
 
 intersphinx_mapping = {

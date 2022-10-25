@@ -1,5 +1,5 @@
-from devo_ml.modelmanager.endpoint import LatestEndpointRenderer
-from devo_ml.modelmanager.endpoint import LegacyEndpointRenderer
+from devo_ml.modelmanager._endpoint import LatestEndpointRenderer
+from devo_ml.modelmanager._endpoint import LegacyEndpointRenderer
 
 
 def test_endpoint_renderer():

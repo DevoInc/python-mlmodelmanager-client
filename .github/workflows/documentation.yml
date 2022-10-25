@@ -36,7 +36,9 @@ jobs:
           echo "RELEASE_VERSION=${POETRY_VERSION}" >> $GITHUB_ENV
       - name: Install dependencies
         run: |
-          pip install sphinx sphinx_rtd_dark_mode
+          pip install sphinx
+          pip install sphinx-autodoc-typehints
+          pip install furo
       - name: Sphinx build
         run: |
           sphinx-build docs/source _build

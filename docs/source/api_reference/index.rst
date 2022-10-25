@@ -5,4 +5,5 @@ API Reference
    :glob:
    :maxdepth: 1
 
+   modelmanager
    *

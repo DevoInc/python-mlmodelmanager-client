@@ -1,5 +1,3 @@
-"""Clients for ML Model Manager server."""
-
 from __future__ import annotations
 
 import os
@@ -9,8 +7,8 @@ from typing import Optional, List
 from .auth import AuthCallable
 from .api import Api
 from .downloader import DownloaderCallable, get_default_downloader
-from .endpoint import EndpointRenderer
-from .endpoint import LatestEndpointRenderer, LegacyEndpointRenderer
+from ._endpoint import EndpointRenderer
+from ._endpoint import LatestEndpointRenderer, LegacyEndpointRenderer
 from .error import ModelManagerError, ModelNotFound, ModelAlreadyExists
 
 
