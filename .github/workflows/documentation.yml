@@ -1,4 +1,5 @@
 # Source: https://coderefinery.github.io/documentation/gh_workflow/
+#         and https://glebbahmutov.com/blog/versioned-doc-pages/
 
 # Publish documentation to: https://devoinc.github.io/python-mlmodelmanager-client/
 name: Docs
@@ -6,7 +7,7 @@ name: Docs
 # After bumping version (when closed Pull Requests to main) and tests are passed
 on:
   workflow_run:
-    workflows: ["Bump version", "Test with tox"]
+    workflows: ["Publish Python Package to Pypi"]
     types:
       - completed
 
@@ -14,18 +15,36 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      #----------------------------------------------
+      #  -----  install & configure poetry  -----
+      #----------------------------------------------
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+          cache: 'poetry'
+      - name: Save version
+        run: |
+          POETRY_VERSION=$(poetry version -s)
+          echo "RELEASE_VERSION=S{POETRY_VERSION}"
+          echo "RELEASE_VERSION=${POETRY_VERSION}" >> $GITHUB_ENV
       - name: Install dependencies
         run: |
           pip install sphinx sphinx_rtd_dark_mode
       - name: Sphinx build
         run: |
           sphinx-build docs/source _build
-      - name: Deploy
+      - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
-          publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: _build/
-          force_orphan: true
+          # deploy the current public folder
+          # to <base url>/x.y.z version subfolder
+          publish_dir: ./_build
+          destination_dir: ${{ env.RELEASE_VERSION }}
