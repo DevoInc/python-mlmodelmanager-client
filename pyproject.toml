@@ -6,6 +6,15 @@ authors = ["Devo ML Team <machine.learning@devo.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "devo_ml"}]
+repository = "https://github.com/DevoInc/python-mlmodelmanager-client"
+documentation = "https://devoinc.github.io/python-mlmodelmanager-client/"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
 
 [tool.poetry.dependencies]
 python = "^3.7"
