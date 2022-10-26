@@ -36,17 +36,22 @@ jobs:
           echo "RELEASE_VERSION=${POETRY_VERSION}" >> $GITHUB_ENV
       - name: Install dependencies
         run: |
-          pip install sphinx
-          pip install sphinx-autodoc-typehints
-          pip install furo
+          poetry install
       - name: Sphinx build
         run: |
-          sphinx-build docs/source _build
-      - name: Deploy 🚀
+          poetry run sphinx-build docs/source _build
+      - name: Deploy version 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # deploy the current public folder
-          # to <base url>/x.y.z version subfolder
+          # to <base url>/v<x.y.z> version subfolder
           publish_dir: ./_build
-          destination_dir: ${{ env.RELEASE_VERSION }}
+          destination_dir: v${{ env.RELEASE_VERSION }}
+      - name: Deploy root 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # deploy the current public folder to <base url>
+          publish_dir: ./_build
+          keep_files: true
