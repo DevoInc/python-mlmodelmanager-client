@@ -1,3 +1,8 @@
+![License](https://img.shields.io/github/license/DevoInc/python-mlmodelmanager-client)
+![Release](https://img.shields.io/github/v/release/DevoInc/python-mlmodelmanager-client?display_name=tag&sort=semver)
+![Tests](https://github.com/DevoInc/python-mlmodelmanager-client/actions/workflows/test-tox.yml/badge.svg)
+![Python](https://img.shields.io/pypi/pyversions/devo-mlmodelmanager) 
+
 # python-mlmodelmanager
 
 An easy-to-use client for Devos’s Machine Learning Model Manager.
