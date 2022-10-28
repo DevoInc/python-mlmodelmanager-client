@@ -1,14 +1,19 @@
-Devo ML Model Manager
-=====================
+Devo ML Model Manager Client
+============================
 
-An easy-to-use client for Devos's Machine Learning Model Manager server.
+The **ML Model Manager** is a service to register machine learning models on
+`Devo <https://www.devo.com>`_ platform. These models can be used through the
+query engine using the ``mlevalmodel(...)`` operation or through the
+`FLOW <https://docs.devo.com/space/latest/95213164/Flow>`_ correlation engine
+including in the context the
+`MlSingleModelEval <https://docs.devo.com/space/latest/95214962/ML+Single+Model+Evaluator>`_
+unit.
 
-Built on top of the widely used :doc:`Requests <requests:index>` library, it
-takes advantage of all the features it provides and exposes a simplified
-interface for manage models.
-
-The main purpose of this library is to allow you focus in the machine learning
-workflows and not worry about the integration with Devo's ML Model Manager.
+devo-mlmodelmanager provides an easy-to-use client for Devo’s ML Model
+Manager. Built on top of the widely used :doc:`Requests <requests:index>`
+library exposes a simplified interface for model management, allowing you to
+focus on the machine learning workflows and not worry about the integration
+with Devo platform.
 
 A quick example
 ---------------

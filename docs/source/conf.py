@@ -9,7 +9,7 @@
 import importlib.metadata
 
 
-project = 'ML Model Manager'
+project = 'ML Model Manager Client'
 copyright = '2022, Devo ML Team'
 author = 'Devo ML Team'
 version = importlib.metadata.version("devo-mlmodelmanager")
