@@ -29,7 +29,7 @@ jobs:
         # https://docs.github.com/en/actions/reference/authentication-in-a-workflow
         # I had some problems, they could be my fault, but yet, I felt using a
         # dedicated token would be better and enough
-        token: ${{ github.token }}
+        token: ${{ secrets.CICD_TOKEN }}
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -39,12 +39,12 @@ jobs:
     - name: Setup Git
       env:
         GH_USER: ${{ github.actor }}
-        GH_TOKEN: ${{ github.token }}
+        GH_TOKEN: ${{ secrets.CICD_TOKEN }}
         PR_TARGET_BRANCH: ${{ github.base_ref }}
       run: |
         git config user.name "${GH_USER}"
         git config user.email "${GH_USER}@users.noreply.github.com"
-        git remote set-url origin https://x-access-token:${{ github.token }}@github.com/$GITHUB_REPOSITORY
+        git remote set-url origin https://x-access-token:${{ secrets.CICD_TOKEN }}@github.com/$GITHUB_REPOSITORY
         git checkout "${PR_TARGET_BRANCH}"
     - name: Setup env variables
       run: |
