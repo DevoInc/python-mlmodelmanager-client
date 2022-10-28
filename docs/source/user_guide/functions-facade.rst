@@ -34,7 +34,7 @@ If the model you are trying to add already exists in the system, a
 :exc:`ModelAlreadyExists <devo_ml.modelmanager.error.ModelAlreadyExists>`
 error will be thrown.
 
-Trough the `force` parameter you can mange whether to override the model.
+Trough the `force` parameter you can manage whether to override the model.
 
 
 :func:`get_model(...) <devo_ml.modelmanager.get_model>`
