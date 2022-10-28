@@ -87,6 +87,7 @@ the model files. Let's implement a AWS S3 Bucket downloader.
                 self.bucket,
                 f"{name}{ext}"
             )
+            return f"{self.bucket}/{name}{ext}"
 
 .. warning::
 

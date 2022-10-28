@@ -38,7 +38,7 @@ In this example we don't tell the client to use any
 :ref:`downloader <Downloaders>` via the constructor keyword `downloader`. In
 that case a
 :class:`FileSystemDownloader <devo_ml.modelmanager.downloader.FileSystemDownloader>`
-will be used as a fallback downloader with the current directory as the path.
+will be used as a fallback downloader with the current directory as path.
 Neither you don't need to worry about downloaders right now because most of the
 time the default downloader is fine, but you could create a client with your
 customize downloader.
