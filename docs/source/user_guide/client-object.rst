@@ -394,7 +394,7 @@ provided, if any. So the sequence of directories to look for a profile file is:
     * user's home directory, ``/home/<user>/``.
 
 If `path` referrer a file name it will search for that file in every directory
-of the set of paths, otherwise if it it referrer a path it perform the same
+of the set of paths, otherwise if it referrer a path it perform the same
 process using `modelmanager.ini` as a file name. In this way you could just
 create a file `modelmanager.ini` with your profiles, place it in the current
 directory or in your home directory and create a client without the param

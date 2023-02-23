@@ -50,3 +50,6 @@ venv.bak/
 
 # IntelliJ IDEA
 .idea/
+
+# Jupyter
+.ipynb_checkpoints
