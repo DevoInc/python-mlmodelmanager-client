@@ -164,8 +164,11 @@
 <li class="toctree-l2"><a class="reference internal" href="downloaders.html">Downloaders</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../api_reference/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/dga-domain-classifier.html">DGA domain classifier</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_reference/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api_reference/modelmanager.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api_reference/api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.api</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api_reference/auth.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.auth</span></code></a></li>
@@ -256,7 +259,7 @@ customize downloader.</p>
 </div>
 <p>Additionally the client accept a set of keywords that will be passing to the
 underlying requests call. These keywords are the supported options by the
-<a class="reference external" href="https://requests.readthedocs.io/en/latest/" title="(in Requests v2.28.1)"><span class="xref std std-doc">Requests</span></a> library. For example, to set a <cite>timeout</cite>
+<a class="reference external" href="https://requests.readthedocs.io/en/latest/" title="(in Requests v2.28.2)"><span class="xref std std-doc">Requests</span></a> library. For example, to set a <cite>timeout</cite>
 you could do:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;http://localhost&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
@@ -548,7 +551,7 @@ provided, if any. So the sequence of directories to look for a profile file is:<
 </ul>
 </div></blockquote>
 <p>If <cite>path</cite> referrer a file name it will search for that file in every directory
-of the set of paths, otherwise if it it referrer a path it perform the same
+of the set of paths, otherwise if it referrer a path it perform the same
 process using <cite>modelmanager.ini</cite> as a file name. In this way you could just
 create a file <cite>modelmanager.ini</cite> with your profiles, place it in the current
 directory or in your home directory and create a client without the param

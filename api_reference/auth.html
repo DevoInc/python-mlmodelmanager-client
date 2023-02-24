@@ -164,8 +164,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../user_guide/downloaders.html">Downloaders</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/dga-domain-classifier.html">DGA domain classifier</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="modelmanager.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.api</span></code></a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.auth</span></code></a></li>
@@ -217,7 +220,7 @@
 <dt class="sig sig-object py" id="devo_ml.modelmanager.auth.AuthCallable">
 <span class="sig-name descname"><span class="pre">AuthCallable</span></span><a class="headerlink" href="#devo_ml.modelmanager.auth.AuthCallable" title="Permalink to this definition">#</a></dt>
 <dd><p>Signature type for callable authentications.</p>
-<p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code>[[<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>], <a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>]</p>
+<p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code>[[<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>], <a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>]</p>
 </dd></dl>
 
 <dl class="py data">
@@ -281,7 +284,7 @@ defaults to <a class="reference internal" href="#devo_ml.modelmanager.auth.STAND
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.11)"><strong>ValueError</strong></a> – if <code class="docutils literal notranslate"><span class="pre">auth_type</span></code> is not valid</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>], <a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>], <a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>]</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>An authentication object</p>
@@ -295,7 +298,7 @@ defaults to <a class="reference internal" href="#devo_ml.modelmanager.auth.STAND
 <dd><p>An HTTP authentication scheme based on a token supported by
 ML Model Manager.</p>
 <p>The implementations of this class are objects ready to use by the client to
-authenticate and also by <a class="reference external" href="https://requests.readthedocs.io/en/latest/user/authentication/" title="(in Requests v2.28.1)"><span class="xref std std-doc">Requests</span></a>
+authenticate and also by <a class="reference external" href="https://requests.readthedocs.io/en/latest/user/authentication/" title="(in Requests v2.28.2)"><span class="xref std std-doc">Requests</span></a>
 library.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="devo_ml.modelmanager.auth.HttpDevoTokenAuth.__init__">
@@ -315,10 +318,10 @@ library.</p>
 call it as a function when authenticate a request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>req</strong> (<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>) – The request object to authenticate</p>
+<dd class="field-odd"><p><strong>req</strong> (<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>) – The request object to authenticate</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The request object authenticated</p>
@@ -339,10 +342,10 @@ Devo Standalone authentication scheme.</p>
 <dd><p>Adds the header <code class="docutils literal notranslate"><span class="pre">standAloneToken:</span> <span class="pre">&lt;token&gt;</span></code> to the request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>req</strong> (<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>) – The request object to authenticate</p>
+<dd class="field-odd"><p><strong>req</strong> (<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>) – The request object to authenticate</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The request object authenticated with proper header</p>
@@ -363,10 +366,10 @@ Bearer authentication scheme.</p>
 <dd><p>Adds the header <code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;token&gt;</span></code> to the request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>req</strong> (<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>) – The request object to authenticate</p>
+<dd class="field-odd"><p><strong>req</strong> (<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>) – The request object to authenticate</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The request object authenticated with proper header</p>
