@@ -1,21 +1,21 @@
 ![License](https://img.shields.io/github/license/DevoInc/python-mlmodelmanager-client)
 ![Release](https://img.shields.io/github/v/release/DevoInc/python-mlmodelmanager-client?display_name=tag&sort=semver)
 ![Tests](https://github.com/DevoInc/python-mlmodelmanager-client/actions/workflows/test-tox.yml/badge.svg)
-![Python](https://img.shields.io/pypi/pyversions/devo-mlmodelmanager) 
+![Python](https://img.shields.io/pypi/pyversions/devo-mlmodelmanager)
 
 # Devo Python ML Model Manager Client
 
-The **ML Model Manager** is a service to register machine learning models on 
-[Devo](https://www.devo.com) platform. These models can be used through the 
-query engine using the `mlevalmodel(...)`  operation or through the 
-[FLOW](https://docs.devo.com/space/latest/95213164/Flow) correlation engine 
-including in the context the 
+The **ML Model Manager** is a service to register machine learning models on
+[Devo](https://www.devo.com) platform. These models can be used through the
+query engine using the `mlevalmodel(...)`  operation or through the
+[FLOW](https://docs.devo.com/space/latest/95213164/Flow) correlation engine
+including in the context the
 [MlSingleModelEval](https://docs.devo.com/space/latest/95214962/ML+Single+Model+Evaluator)
 unit.
 
 **devo-mlmodelmanager** provides an easy-to-use client for Devo’s ML Model
-Manager. Built on top of the widely used 
-[Requests](https://requests.readthedocs.io/en/latest/) library exposes a 
+Manager. Built on top of the widely used
+[Requests](https://requests.readthedocs.io/en/latest/) library exposes a
 simplified interface for model management, allowing you to focus in the machine
 learning workflows and not worry about the integration with Devo platform.
 
