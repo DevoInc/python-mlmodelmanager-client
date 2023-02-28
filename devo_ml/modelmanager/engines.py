@@ -18,21 +18,9 @@ H2O = "H2O"
 #: | Extensions: ``.json``
 BIGML = "BIGML"
 
-#: | Constant denoting `DL4J <https://deeplearning4j.konduit.ai/>`_ model.
-#: | Extensions: ``.h5``
-DL4J = "DL4J"
-
 #: | Constant denoting `CatBoost <https://catboost.ai/>`_ model.
 #: | Extensions: ``.cmb``
 CATBOOST = "CATBOOST"
-
-#: | Constant denoting DeepLog CORE model.
-#: | Extensions: ``.zip``
-DEEPLOGCORE = "DEEPLOGCORE"
-
-#: | Constant denoting DEEPLOG APP model.
-#: | Extensions: ``.zip``
-DEEPLOGAPP = "DEEPLOGAPP"
 
 #: | Constant denoting Decision Tree model.
 #: | Extensions: ``.zip``
@@ -77,21 +65,9 @@ _aware_engines = {
         "code": BIGML,
         "extensions": [_dot_json],
     },
-    DL4J: {
-        "code": DL4J,
-        "extensions": [_dot_h5],
-    },
     CATBOOST: {
         "code": CATBOOST,
         "extensions": [_dot_cbm],
-    },
-    DEEPLOGCORE: {
-        "code": DEEPLOGCORE,
-        "extensions": [_dot_zip],
-    },
-    DEEPLOGAPP: {
-        "code": DEEPLOGAPP,
-        "extensions": [_dot_zip],
     },
     DT: {
         "code": DT,
