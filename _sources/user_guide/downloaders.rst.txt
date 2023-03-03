@@ -35,16 +35,17 @@ associated to the engine.
 .. note::
 
     The :class:`FileSystemDownloader <devo_ml.modelmanager.downloader.FileSystemDownloader>`
-    it used as a fallback downloader when a downloader is not provided when creating
-    a :class:`Client <devo_ml.modelmanager.client.Client>`, and in places where it
-    is not possible passing custom downloaders;
-    :ref:`client factories <Factories>` and :ref:`functions facade <Functions Facade>`.
+    it used as a fallback downloader when a downloader is not provided when
+    creating a :class:`Client <devo_ml.modelmanager.client.Client>`, and in
+    places where it is not possible passing custom downloaders;
+    :ref:`client factories <user_guide/client-object:Factories>` and
+    :ref:`functions facade <user_guide/functions-facade:Functions Facade>`.
 
 
 Example AWS S3 Bucket Downloader
 --------------------------------
 
-This is example of how to customize the behavior of the client on downloading
+This is an example of how to customize the behavior of the client on downloading
 the model files. Let's implement a AWS S3 Bucket downloader.
 
 .. code-block::

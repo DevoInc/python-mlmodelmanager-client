@@ -26,7 +26,7 @@ manage models of the server `http://localhost`.
 
 .. warning::
 
-    The token used above is not a valid token, don't try to use with a real
+    The token used above is not a valid token, don't try to use it with a real
     server.
 
 Don't worry about :ref:`authentication <Authentication>`, we'll get into it a
@@ -35,13 +35,13 @@ bit later. Just be aware that we have created a client with the Devo's
 authentication method.
 
 In this example we don't tell the client to use any
-:ref:`downloader <Downloaders>` via the constructor keyword `downloader`. In
-that case a
+:ref:`downloader <user_guide/downloaders:Downloaders>` via the constructor
+keyword `downloader`. In that case a
 :class:`FileSystemDownloader <devo_ml.modelmanager.downloader.FileSystemDownloader>`
 will be used as a fallback downloader with the current directory as path.
 Neither you don't need to worry about downloaders right now because most of the
 time the default downloader is fine, but you could create a client with your
-customize downloader.
+custom downloader.
 
 .. code-block::
 
@@ -187,7 +187,7 @@ If the model you are trying to query does not exists, a
     >>>
 
 The `download_file` parameter sets whether to download the model file through
-the inner :ref:`downloader <Downloaders>` of the client.
+the inner :ref:`downloader <user_guide/downloaders:Downloaders>` of the client.
 
 .. code-block::
 

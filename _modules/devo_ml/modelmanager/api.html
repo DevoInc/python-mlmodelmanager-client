@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
+    <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
         <title>devo_ml.modelmanager.api - ML Model Manager Client documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -148,7 +148,7 @@
   <span class="sidebar-brand-text">ML Model Manager Client  documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
-  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
@@ -165,6 +165,7 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../tutorials/dga-domain-classifier.html">DGA domain classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/ecommerce_clustering.html">Ecommerce Clustering</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../api_reference/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -230,7 +231,7 @@
 
 
 <div class="viewcode-block" id="decode_response"><a class="viewcode-back" href="../../../api_reference/api.html#devo_ml.modelmanager.api.decode_response">[docs]</a><span class="k">def</span> <span class="nf">decode_response</span><span class="p">(</span><span class="n">response</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Response</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Decodes a requests response to json.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decodes a requests response to json.</span>
 
 <span class="sd">    :param response: The requests response</span>
 <span class="sd">    :return: A decoded response or None if any decode error.</span>
@@ -242,7 +243,7 @@
 
 
 <div class="viewcode-block" id="validate_or_raise_error"><a class="viewcode-back" href="../../../api_reference/api.html#devo_ml.modelmanager.api.validate_or_raise_error">[docs]</a><span class="k">def</span> <span class="nf">validate_or_raise_error</span><span class="p">(</span><span class="n">status_code</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Checks whether a decoded response is valid.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks whether a decoded response is valid.</span>
 
 <span class="sd">    Depend on the status code value will raise an exception. Only 2xx status</span>
 <span class="sd">    code are considered valid.</span>
@@ -265,10 +266,10 @@
 
 
 <div class="viewcode-block" id="Api"><a class="viewcode-back" href="../../../api_reference/api.html#devo_ml.modelmanager.api.Api">[docs]</a><span class="k">class</span> <span class="nc">Api</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Low level api calls based on :doc:`Requests &lt;requests:index&gt;` lib.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Low level api calls based on :doc:`Requests &lt;requests:index&gt;` lib.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Api.__init__"><a class="viewcode-back" href="../../../api_reference/api.html#devo_ml.modelmanager.api.Api.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auth</span><span class="p">:</span> <span class="n">AuthCallable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Creates a :class:`Api`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a :class:`Api`.</span>
 
 <span class="sd">        :param auth: The authentication to use</span>
 <span class="sd">        :param kwargs: Options to the underlying requests</span>
@@ -279,7 +280,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_http_method</span> <span class="o">=</span> <span class="s2">&quot;get&quot;</span></div>
 
 <div class="viewcode-block" id="Api.__getattr__"><a class="viewcode-back" href="../../../api_reference/api.html#devo_ml.modelmanager.api.Api.__getattr__">[docs]</a>    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Saves method to call if `attr` is a valid method. Otherwise,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Saves method to call if `attr` is a valid method. Otherwise,</span>
 <span class="sd">        built-in followed.</span>
 
 <span class="sd">        :param attr: The attribute name to get</span>
@@ -291,7 +292,7 @@
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Api.__call__"><a class="viewcode-back" href="../../../api_reference/api.html#devo_ml.modelmanager.api.Api.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Call to an endpoint.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Call to an endpoint.</span>
 
 <span class="sd">        :param endpoint: The endpoint to call</span>
 <span class="sd">        :param kwargs: Custom options to the underlying requests for this call</span>
@@ -303,7 +304,7 @@
         <span class="k">return</span> <span class="n">decoded_response</span></div>
 
 <div class="viewcode-block" id="Api.request"><a class="viewcode-back" href="../../../api_reference/api.html#devo_ml.modelmanager.api.Api.request">[docs]</a>    <span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">requests</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Wraps a requests call to catch any error in :exc:`ModelManagerError</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Wraps a requests call to catch any error in :exc:`ModelManagerError</span>
 <span class="sd">        &lt;devo_ml.modelmanager.error.ModelManagerError&gt;`.</span>
 
 <span class="sd">        :param endpoint: The endpoint to request</span>
@@ -321,7 +322,7 @@
             <span class="k">raise</span> <span class="n">ModelManagerError</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span> <span class="kn">from</span> <span class="nn">e</span></div>
 
 <div class="viewcode-block" id="Api.build_request_options"><a class="viewcode-back" href="../../../api_reference/api.html#devo_ml.modelmanager.api.Api.build_request_options">[docs]</a>    <span class="k">def</span> <span class="nf">build_request_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Builds the options for a request by merging the :class:`Api` object</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Builds the options for a request by merging the :class:`Api` object</span>
 <span class="sd">        request options with the options provided.</span>
 
 <span class="sd">        The options provided take precedence over the options in the</span>
@@ -355,9 +356,7 @@
             
           </div>
           <div class="right-details">
-            <div class="icons">
-              
-            </div>
+            
           </div>
         </div>
         
@@ -370,9 +369,6 @@
     </aside>
   </div>
 </div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/scripts/furo.js"></script>

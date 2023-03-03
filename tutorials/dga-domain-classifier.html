@@ -3,12 +3,12 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="API Reference" href="../api_reference/index.html" /><link rel="prev" title="Tutorials" href="index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Ecommerce Clustering" href="ecommerce_clustering.html" /><link rel="prev" title="Tutorials" href="index.html" />
 
-    <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
+    <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
         <title>DGA domain classifier - ML Model Manager Client documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -149,7 +149,7 @@
   <span class="sidebar-brand-text">ML Model Manager Client  documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
-  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
@@ -166,6 +166,7 @@
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">DGA domain classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecommerce_clustering.html">Ecommerce Clustering</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../api_reference/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -228,7 +229,7 @@ the purpose of receiving an update or commands. See
 to learn more about domain generation algorithms.</p>
 <p>We are going to develop a simple machine learning model capable of classifying
 malicious domains in the <em>demo.ecommerce.data</em> table. We will use the Machine
-Learning <a class="reference external" href="https://h2o.ai/">H2O</a> framework to build and train our model,
+Learning <a class="reference external" href="https://h2o.ai/">H2O AI</a> framework to build and train our model,
 the Machine Learning Model Manager Client to register it on the Devo platform,
 and the <a class="reference external" href="https://github.com/DevoInc/python-sdk">Devo Python SDK</a> framework to
 evaluate and classify in real time the domains in the table using a query.</p>
@@ -239,9 +240,9 @@ evaluate and classify in real time the domains in the table using a query.</p>
 <section id="build-the-model">
 <h2>Build the model<a class="headerlink" href="#build-the-model" title="Permalink to this heading">#</a></h2>
 <p>Let’s start by installing the required packages.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install devo-sdk
-$ pip install devo-mlmodelmanager
-$ pip install h2o
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>devo-sdk
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>devo-mlmodelmanager
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>h2o
 </pre></div>
 </div>
 <p>Then the needed imports.</p>
@@ -349,10 +350,10 @@ an optimal and accurate machine learning model.</p>
 Devo platform in order to exploit it. For this we will use the ML Model Manager
 Client.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># create the mlmm client</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">create_client_from_token</span><span class="p">(</span><span class="n">DEVO_MLMM_URL</span><span class="p">,</span> <span class="n">TOKEN</span><span class="p">)</span>
+<span class="n">mlmm</span> <span class="o">=</span> <span class="n">create_client_from_token</span><span class="p">(</span><span class="n">DEVO_MLMM_URL</span><span class="p">,</span> <span class="n">TOKEN</span><span class="p">)</span>
 
 <span class="c1"># register the model</span>
-<span class="n">client</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span>
+<span class="n">mlmm</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span>
     <span class="n">NAME</span><span class="p">,</span>
     <span class="n">engines</span><span class="o">.</span><span class="n">H2O</span><span class="p">,</span>
     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">MODELS_PATH</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">NAME</span><span class="si">}</span><span class="s2">.zip&quot;</span><span class="p">),</span>
@@ -363,14 +364,14 @@ Client.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Refer to <a class="reference internal" href="../user_guide/index.html#user-s-guide"><span class="std std-ref">user’s guide</span></a> of this documentation to learn
+<p>Refer to <a class="reference internal" href="../user_guide/index.html#user-s-guide"><span class="std std-ref">User’s Guide</span></a> of this documentation to learn
 more about the ML Model Manager Client.</p>
 </div>
 <p>So far we have everything ready to exploit our model.</p>
 </section>
 <section id="classify-domains">
 <h2>Classify domains<a class="headerlink" href="#classify-domains" title="Permalink to this heading">#</a></h2>
-<p>One way to evaluate a model is is by querying a table and the
+<p>One way to evaluate a model is by querying a table and the
 <code class="docutils literal notranslate"><span class="pre">mlevalmodel(...)</span></code> operator available in the Devo query engine capable
 of evaluating machine learning models.</p>
 <p>We are going to use the <em>demo.ecommerce.data</em> table, which contains the
@@ -424,12 +425,12 @@ to learn more about the Devo Query API.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../api_reference/index.html">
+          <a class="next-page" href="ecommerce_clustering.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">API Reference</div>
+                <div class="title">Ecommerce Clustering</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -456,9 +457,7 @@ to learn more about the Devo Query API.</p>
             
           </div>
           <div class="right-details">
-            <div class="icons">
-              
-            </div>
+            
           </div>
         </div>
         
@@ -492,9 +491,6 @@ to learn more about the Devo Query API.</p>
     </aside>
   </div>
 </div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/scripts/furo.js"></script>

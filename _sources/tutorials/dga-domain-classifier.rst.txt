@@ -17,7 +17,7 @@ to learn more about domain generation algorithms.
 
 We are going to develop a simple machine learning model capable of classifying
 malicious domains in the *demo.ecommerce.data* table. We will use the Machine
-Learning `H2O <https://h2o.ai/>`_ framework to build and train our model,
+Learning `H2O AI <https://h2o.ai/>`_ framework to build and train our model,
 the Machine Learning Model Manager Client to register it on the Devo platform,
 and the `Devo Python SDK <https://github.com/DevoInc/python-sdk>`_ framework to
 evaluate and classify in real time the domains in the table using a query.
@@ -156,10 +156,10 @@ Client.
 .. code-block::
 
     # create the mlmm client
-    client = create_client_from_token(DEVO_MLMM_URL, TOKEN)
+    mlmm = create_client_from_token(DEVO_MLMM_URL, TOKEN)
 
     # register the model
-    client.add_model(
+    mlmm.add_model(
         NAME,
         engines.H2O,
         os.path.join(MODELS_PATH, f"{NAME}.zip"),
@@ -169,7 +169,7 @@ Client.
 
 .. note::
 
-    Refer to :ref:`user's guide <User's Guide>` of this documentation to learn
+    Refer to :ref:`user_guide/index:User's Guide` of this documentation to learn
     more about the ML Model Manager Client.
 
 So far we have everything ready to exploit our model.
@@ -177,7 +177,7 @@ So far we have everything ready to exploit our model.
 Classify domains
 ----------------
 
-One way to evaluate a model is is by querying a table and the
+One way to evaluate a model is by querying a table and the
 ``mlevalmodel(...)`` operator available in the Devo query engine capable
 of evaluating machine learning models.
 

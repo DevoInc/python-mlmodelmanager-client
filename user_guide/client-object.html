@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Functions Facade" href="functions-facade.html" /><link rel="prev" title="Installation" href="installation.html" />
 
-    <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
+    <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
         <title>Client Object - ML Model Manager Client documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -149,7 +149,7 @@
   <span class="sidebar-brand-text">ML Model Manager Client  documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
-  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
@@ -166,6 +166,7 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/dga-domain-classifier.html">DGA domain classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/ecommerce_clustering.html">Ecommerce Clustering</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../api_reference/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -234,21 +235,21 @@ ML Model Manager server and an authentication based on a token.</p>
 manage models of the server <cite>http://localhost</cite>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The token used above is not a valid token, don’t try to use with a real
+<p>The token used above is not a valid token, don’t try to use it with a real
 server.</p>
 </div>
-<p>Don’t worry about <a class="reference internal" href="authentication.html#authentication"><span class="std std-ref">authentication</span></a>, we’ll get into it a
+<p>Don’t worry about <a class="reference external" href="https://requests.readthedocs.io/en/latest/user/authentication/#authentication" title="(in Requests v2.28.2)"><span class="xref std std-ref">authentication</span></a>, we’ll get into it a
 bit later. Just be aware that we have created a client with the Devo’s
 <code class="docutils literal notranslate"><span class="pre">standAloneToken</span></code> token scheme to authenticate, which is the default
 authentication method.</p>
 <p>In this example we don’t tell the client to use any
-<a class="reference internal" href="downloaders.html#downloaders"><span class="std std-ref">downloader</span></a> via the constructor keyword <cite>downloader</cite>. In
-that case a
+<a class="reference internal" href="downloaders.html#downloaders"><span class="std std-ref">downloader</span></a> via the constructor
+keyword <cite>downloader</cite>. In that case a
 <a class="reference internal" href="../api_reference/downloader.html#devo_ml.modelmanager.downloader.FileSystemDownloader" title="devo_ml.modelmanager.downloader.FileSystemDownloader"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileSystemDownloader</span></code></a>
 will be used as a fallback downloader with the current directory as path.
 Neither you don’t need to worry about downloaders right now because most of the
 time the default downloader is fine, but you could create a client with your
-customize downloader.</p>
+custom downloader.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager.downloader</span> <span class="kn">import</span> <span class="n">FileSystemDownloader</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
@@ -315,7 +316,7 @@ will be thrown.</p>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
   File <span class="nb">&quot;.../devo_ml/modelmanager/client.py&quot;</span>, line <span class="m">67</span>, in <span class="n">add_model</span>
-    <span class="k">raise</span> <span class="n">ModelAlreadyExists</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="w">    </span><span class="k">raise</span> <span class="n">ModelAlreadyExists</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 <span class="gr">devo_ml.modelmanager.error.ModelAlreadyExists</span>: <span class="n">&#39;existing_model_name&#39;</span>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
@@ -367,7 +368,7 @@ query the data of an existing model.</p>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
   File <span class="nb">&quot;.../devo_ml/modelmanager/client.py&quot;</span>, line <span class="m">42</span>, in <span class="n">get_model</span>
-    <span class="k">raise</span> <span class="n">ModelNotFound</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="w">    </span><span class="k">raise</span> <span class="n">ModelNotFound</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 <span class="gr">devo_ml.modelmanager.error.ModelNotFound</span>: <span class="n">&#39;non_existing_model_name&#39;</span>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
@@ -453,11 +454,11 @@ passing in the target domain.</p>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
   File <span class="nb">&quot;.../devo_ml/modelmanager/client.py&quot;</span>, line <span class="m">34</span>, in <span class="n">get_models</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">endpoints</span><span class="o">.</span><span class="n">models</span><span class="p">())</span>
+<span class="w">    </span><span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">endpoints</span><span class="o">.</span><span class="n">models</span><span class="p">())</span>
   File <span class="nb">&quot;.../devo_ml/modelmanager/api.py&quot;</span>, line <span class="m">89</span>, in <span class="n">__call__</span>
-    <span class="n">validate_or_raise_error</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">decoded_response</span><span class="p">)</span>
+<span class="w">    </span><span class="n">validate_or_raise_error</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">decoded_response</span><span class="p">)</span>
   File <span class="nb">&quot;.../devo_ml/modelmanager/api.py&quot;</span>, line <span class="m">40</span>, in <span class="n">validate_or_raise_error</span>
-    <span class="k">raise</span> <span class="n">ModelManagerError</span><span class="o">.</span><span class="n">from_code</span><span class="p">(</span>
+<span class="w">    </span><span class="k">raise</span> <span class="n">ModelManagerError</span><span class="o">.</span><span class="n">from_code</span><span class="p">(</span>
 <span class="gr">devo_ml.modelmanager.error.ModelManagerError</span>: <span class="n">404: HTTP 404 Not Found</span>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
@@ -566,17 +567,17 @@ directory or in your home directory and create a client without the param
 <p>Profiles files are INI files compatible with the built-int Python
 <a class="reference external" href="https://docs.python.org/3/library/configparser.html" title="(in Python v3.11)"><span class="xref std std-doc">ConfigParser</span></a> module, capable of parsing
 a kind of <cite>Microsoft Windows INI</cite> files. Let’s see an example.</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[dev]</span><span class="w"></span>
-<span class="na">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://dev_url</span><span class="w"></span>
-<span class="na">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">8a3vf98ai28sar1234lkj2l43td6f89a</span><span class="w"></span>
-<span class="na">auth_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">standalone</span><span class="w"></span>
-<span class="na">download_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">~/models</span><span class="w"></span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[dev]</span>
+<span class="na">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://dev_url</span>
+<span class="na">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">8a3vf98ai28sar1234lkj2l43td6f89a</span>
+<span class="na">auth_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">standalone</span>
+<span class="na">download_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">~/models</span>
 
-<span class="k">[testing]</span><span class="w"></span>
-<span class="na">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://testing_url</span><span class="w"></span>
-<span class="na">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">26ab4c69f641bd3622a3b59bc09f781c</span><span class="w"></span>
-<span class="na">auth_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">standalone</span><span class="w"></span>
-<span class="na">download_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">~/models</span><span class="w"></span>
+<span class="k">[testing]</span>
+<span class="na">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://testing_url</span>
+<span class="na">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">26ab4c69f641bd3622a3b59bc09f781c</span>
+<span class="na">auth_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">standalone</span>
+<span class="na">download_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">~/models</span>
 </pre></div>
 </div>
 <p>We have defined two profiles: <cite>dev</cite> and <cite>testing</cite>. Each of them have a set of
@@ -650,9 +651,7 @@ they are interchangeable.</p>
             
           </div>
           <div class="right-details">
-            <div class="icons">
-              
-            </div>
+            
           </div>
         </div>
         
@@ -701,9 +700,6 @@ they are interchangeable.</p>
     </aside>
   </div>
 </div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/scripts/furo.js"></script>
