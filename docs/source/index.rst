@@ -23,9 +23,10 @@ That easy is to create a client:
     >>> from devo_ml.modelmanager import create_client_from_token
     >>> client = create_client_from_token("https://the_url", "the_token")
 
-Here we use a :ref:`client factory <Create Client From Token>` to create a
-:ref:`client <Client Object>` object, this is a convenient
-way of create a client ready to use.
+Here we use a
+:ref:`client factory <user_guide/client-object:Create Client From Token>`
+to create a :ref:`client <user_guide/client-object:Client Object>` object,
+this is a convenient way of create a client ready to use.
 
 Now we can start manage our models, e.g. to get a model called
 `pokemon_onnx_regression`:

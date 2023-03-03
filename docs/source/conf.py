@@ -30,6 +30,7 @@ templates_path = ['_templates']
 exclude_patterns = []
 autodoc_member_order = 'bysource'
 add_module_names = False
+autosectionlabel_prefix_document = True
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
