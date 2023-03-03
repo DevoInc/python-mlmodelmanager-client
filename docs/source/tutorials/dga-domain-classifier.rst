@@ -177,7 +177,7 @@ So far we have everything ready to exploit our model.
 Classify domains
 ----------------
 
-One way to evaluate a model is is by querying a table and the
+One way to evaluate a model is by querying a table and the
 ``mlevalmodel(...)`` operator available in the Devo query engine capable
 of evaluating machine learning models.
 

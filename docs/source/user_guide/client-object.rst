@@ -26,7 +26,7 @@ manage models of the server `http://localhost`.
 
 .. warning::
 
-    The token used above is not a valid token, don't try to use with a real
+    The token used above is not a valid token, don't try to use it with a real
     server.
 
 Don't worry about :ref:`authentication <Authentication>`, we'll get into it a
@@ -41,7 +41,7 @@ that case a
 will be used as a fallback downloader with the current directory as path.
 Neither you don't need to worry about downloaders right now because most of the
 time the default downloader is fine, but you could create a client with your
-customize downloader.
+custom downloader.
 
 .. code-block::
 

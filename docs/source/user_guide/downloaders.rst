@@ -44,7 +44,7 @@ associated to the engine.
 Example AWS S3 Bucket Downloader
 --------------------------------
 
-This is example of how to customize the behavior of the client on downloading
+This is an example of how to customize the behavior of the client on downloading
 the model files. Let's implement a AWS S3 Bucket downloader.
 
 .. code-block::
