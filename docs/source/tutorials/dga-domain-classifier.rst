@@ -169,7 +169,7 @@ Client.
 
 .. note::
 
-    Refer to :ref:`user's guide <User's Guide>` of this documentation to learn
+    Refer to :ref:`user_guide/index:User's Guide` of this documentation to learn
     more about the ML Model Manager Client.
 
 So far we have everything ready to exploit our model.

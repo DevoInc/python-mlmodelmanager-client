@@ -7,9 +7,10 @@ request, perform an action to authenticate that request and return the
 authenticated request.
 
 An authenticated request must have a valid token in an HTML header with one of
-the supported authentication methods; :ref:`StandAloneToken scheme` or
-:ref:`Bearer scheme`. The library provides implementations for both
-authentication methods.
+the supported authentication methods;
+:ref:`user_guide/authentication:StandAloneToken scheme` or
+:ref:`user_guide/authentication:Bearer scheme`. The library provides
+implementations for both authentication methods.
 
 .. note::
 
