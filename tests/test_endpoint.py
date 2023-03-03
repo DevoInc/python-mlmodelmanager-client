@@ -4,11 +4,11 @@ from devo_ml.modelmanager._endpoint import LegacyEndpointRenderer
 
 def test_endpoint_renderer():
     endpoints = LatestEndpointRenderer("http://localhost")
-    assert endpoints.models() ==  "http://localhost/models"
+    assert endpoints.models() == "http://localhost/models"
     assert endpoints.model("foo") == "http://localhost/models/foo"
     assert endpoints.image_upload() == "http://localhost/models/images/upload"
     endpoints = LatestEndpointRenderer("http://localhost/")
-    assert endpoints.models() ==  "http://localhost/models"
+    assert endpoints.models() == "http://localhost/models"
     assert endpoints.model("foo") == "http://localhost/models/foo"
     assert endpoints.image_upload() == "http://localhost/models/images/upload"
 
