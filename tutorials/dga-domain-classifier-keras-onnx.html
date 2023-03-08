@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="DGA domain classifier (Keras-ONNX)" href="dga-domain-classifier-keras-onnx.html" /><link rel="prev" title="Tutorials" href="index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Ecommerce Clustering" href="ecommerce_clustering.html" /><link rel="prev" title="DGA domain classifier" href="dga-domain-classifier.html" />
 
     <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
-        <title>DGA domain classifier - ML Model Manager Client documentation</title>
+        <title>DGA domain classifier (Keras-ONNX) - ML Model Manager Client documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -165,8 +165,8 @@
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">DGA domain classifier</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dga-domain-classifier-keras-onnx.html">DGA domain classifier (Keras-ONNX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dga-domain-classifier.html">DGA domain classifier</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">DGA domain classifier (Keras-ONNX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ecommerce_clustering.html">Ecommerce Clustering</a></li>
 </ul>
 </li>
@@ -215,42 +215,43 @@
           </label>
         </div>
         <article role="main">
-          <section id="dga-domain-classifier">
-<h1>DGA domain classifier<a class="headerlink" href="#dga-domain-classifier" title="Permalink to this heading">#</a></h1>
-<p>This tutorial shows how to perform real-time <cite>DGA</cite> domain classification using
-a machine learning model for logs stored in the <a class="reference external" href="https://www.devo.com">Devo</a>
-platform.</p>
-<p>Domain generation algorithms, <cite>DGA</cite>, are algorithms seen in various families of
-malware that are used to periodically generate a large number of domain names
-that can be used as rendezvous points with their command and control servers.</p>
-<p>For example, an infected computer could create thousands of domain names such
-as: www.&lt;gibberish&gt;.com and would attempt to contact a portion of these with
-the purpose of receiving an update or commands. See
-<a class="reference external" href="https://en.wikipedia.org/wiki/Domain_generation_algorithm">DGA on Wikipedia</a>
-to learn more about domain generation algorithms.</p>
-<p>We are going to develop a simple machine learning model capable of classifying
-malicious domains in the <em>demo.ecommerce.data</em> table. We will use the Machine
-Learning <a class="reference external" href="https://h2o.ai/">H2O AI</a> framework to build and train our model,
-the Machine Learning Model Manager Client to register it on the Devo platform,
-and the <a class="reference external" href="https://github.com/DevoInc/python-sdk">Devo Python SDK</a> framework to
-evaluate and classify in real time the domains in the table using a query.</p>
+          <section id="dga-domain-classifier-keras-onnx">
+<h1>DGA domain classifier (Keras-ONNX)<a class="headerlink" href="#dga-domain-classifier-keras-onnx" title="Permalink to this heading">#</a></h1>
+<p>This tutorial is related to the
+<a class="reference internal" href="dga-domain-classifier.html#dga-domain-classifier"><span class="std std-ref">DGA domain classifier using H2O engine tutorial</span></a>
+but in this case is used <a class="reference external" href="https://keras.io/">Keras</a> as machine learning engine.</p>
+<p>We are going to use the <a class="reference external" href="https://github.com/keras-team/keras">Keras framework</a>
+to create a model capable of detecting whether a domain is malicious
+or not. Then in order to be able to register and use the <cite>Keras</cite> model in
+<a class="reference external" href="https://www.devo.com">Devo</a> we will show how to transform it into <cite>ONNX</cite>
+format.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><a class="reference external" href="https://github.com/DevoInc/python-mlmodelmanager-client/blob/main/notebooks/dga-domain-classifier.ipynb">The tutorial is available as a Jupyter notebook</a>.</p>
+<p><a class="reference external" href="https://github.com/DevoInc/python-mlmodelmanager-client/blob/main/notebooks/dga-domain-classifier-keras-onnx.ipynb">The tutorial is available as a Jupyter notebook</a>.</p>
 </div>
 <section id="build-the-model">
 <h2>Build the model<a class="headerlink" href="#build-the-model" title="Permalink to this heading">#</a></h2>
 <p>Let’s start by installing the required packages.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>devo-sdk
 $<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>devo-mlmodelmanager
-$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>h2o
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>tensorflow
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>tf2onnx
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>scikit-learn
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>numpy
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pandas
 </pre></div>
 </div>
-<p>Then the needed imports.</p>
+<p>We can start coding by the needed imports.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">h2o</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tf2onnx</span>
 
-<span class="kn">from</span> <span class="nn">h2o.estimators</span> <span class="kn">import</span> <span class="n">H2OGradientBoostingEstimator</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
 <span class="kn">from</span> <span class="nn">devo.api</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">ClientConfig</span><span class="p">,</span> <span class="n">SIMPLECOMPACT_TO_OBJ</span>
 <span class="kn">from</span> <span class="nn">devo_ml.modelmanager</span> <span class="kn">import</span> <span class="n">create_client_from_token</span><span class="p">,</span> <span class="n">engines</span>
 </pre></div>
@@ -269,32 +270,32 @@ $<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </sp
 <span class="n">DOMAIN</span> <span class="o">=</span> <span class="s1">&#39;&lt;your_domain_here&gt;&#39;</span>
 
 <span class="c1"># The name of the model</span>
-<span class="n">NAME</span> <span class="o">=</span> <span class="s1">&#39;dga_classifier&#39;</span>
+<span class="n">NAME</span> <span class="o">=</span> <span class="s1">&#39;dga_classifier_onnx&#39;</span>
 
 <span class="c1"># The description of the models</span>
-<span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s1">&#39;DGA domain classifier&#39;</span>
+<span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s1">&#39;DGA domain classifier (Keras-ONNX)&#39;</span>
 
-<span class="c1"># The path where model file will be stored</span>
-<span class="n">MODELS_PATH</span> <span class="o">=</span> <span class="s1">&#39;~/models&#39;</span>
+<span class="c1"># File to store the onnx model</span>
+<span class="n">MODEL_FILE</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">NAME</span><span class="si">}</span><span class="s1">.onnx&#39;</span>
 
 <span class="c1"># The URL of a dataset to build the model</span>
 <span class="n">DATASET_URL</span> <span class="o">=</span> <span class="s2">&quot;https://devo-ml-models-public-demos.s3.eu-west-3.amazonaws.com/legit_dga/dataset.csv&quot;</span>
 
 <span class="n">VOWELS</span> <span class="o">=</span> <span class="s2">&quot;aeiouAEIOU&quot;</span>
+
+<span class="c1"># fix random seed for reproducibility</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>We use the <a class="reference external" href="https://docs.h2o.ai/h2o/latest-stable/h2o-py/docs/index.html">h2o</a>
-library to create a model capable of detecting whether a domain is malicious or
-not and this <a class="reference external" href="https://devo-ml-models-public-demos.s3.eu-west-3.amazonaws.com/legit_dga/dataset.csv">dataset</a>
-, which has the form: <em>host;domain;class;subclass.</em></p>
+<p>This <a class="reference external" href="https://devo-ml-models-public-demos.s3.eu-west-3.amazonaws.com/legit_dga/dataset.csv">dataset</a>
+will help us to train our model once it has been built. The dataset has the
+form <code class="docutils literal notranslate"><span class="pre">host;domain;class;subclass</span></code>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>host;domain;class;subclass
 000directory.com.ar;000directory;legit;legit
-000webhost.com;000webhost;legit;legit
 001fans.com;001fans;legit;legit
 ...
 1002n0q11m17h017r1shexghfqf.net;1002n0q11m17h017r1shexghfqf;dga;newgoz
-1002ra86698fjpgqke1cdvbk5.org;1002ra86698fjpgqke1cdvbk5;dga;newgoz
-1008bnt1iekzdt1fqjb76pijxhr.org;1008bnt1iekzdt1fqjb76pijxhr;dga;newgoz
 100bestbuy.com;100bestbuy;legit;legit
 ...
 </pre></div>
@@ -302,62 +303,138 @@ not and this <a class="reference external" href="https://devo-ml-models-public-d
 <p>In the dataset preparation we will add the columns <code class="docutils literal notranslate"><span class="pre">length</span></code>, <code class="docutils literal notranslate"><span class="pre">entropy</span></code> and
 <code class="docutils literal notranslate"><span class="pre">vowel_proportion</span></code> for each domain, and also the flag <code class="docutils literal notranslate"><span class="pre">malicious</span></code> indicating
 if it is a DGA domain according to the <code class="docutils literal notranslate"><span class="pre">class</span></code> column value.</p>
-<p>As a result we will have a model saved in a file in <cite>~/models</cite>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h2o</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">entropy</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">l</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">l</span><span class="p">),</span> <span class="n">Counter</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
 
-<span class="c1"># import dataset</span>
-<span class="n">domains</span> <span class="o">=</span> <span class="n">h2o</span><span class="o">.</span><span class="n">import_file</span><span class="p">(</span><span class="n">DATASET_URL</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">domains</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">DATASET_URL</span><span class="p">,</span> <span class="s1">&#39;;&#39;</span><span class="p">)</span>
 
-<span class="c1"># Prepare dataset</span>
 <span class="n">domains</span> <span class="o">=</span> <span class="n">domains</span><span class="p">[</span><span class="o">~</span><span class="n">domains</span><span class="p">[</span><span class="s1">&#39;subclass&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span>
-<span class="n">domains</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nchar</span><span class="p">()</span>
-<span class="n">domains</span><span class="p">[</span><span class="s1">&#39;entropy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">entropy</span><span class="p">()</span>
+<span class="n">domains</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span>
+<span class="n">domains</span><span class="p">[</span><span class="s1">&#39;entropy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">entropy</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
 <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;vowel_proportion&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">VOWELS</span><span class="p">:</span>
-    <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;vowel_proportion&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">countmatches</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;vowel_proportion&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;vowel_proportion&#39;</span><span class="p">]</span> <span class="o">/=</span> <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span>
 <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;malicious&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;legit&#39;</span>
-<span class="n">domains</span><span class="p">[</span><span class="s1">&#39;malicious&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;malicious&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">asfactor</span><span class="p">()</span>
-
-<span class="c1"># split dataset</span>
-<span class="n">train</span><span class="p">,</span> <span class="n">valid</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">split_frame</span><span class="p">(</span><span class="n">ratios</span><span class="o">=</span><span class="p">[</span><span class="mf">.8</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1234</span><span class="p">)</span>
-
-<span class="c1"># create and train the model</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">H2OGradientBoostingEstimator</span><span class="p">(</span><span class="n">model_id</span><span class="o">=</span><span class="n">NAME</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">,</span> <span class="s1">&#39;entropy&#39;</span><span class="p">,</span> <span class="s1">&#39;vowel_proportion&#39;</span><span class="p">],</span>
-    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;malicious&#39;</span><span class="p">,</span>
-    <span class="n">training_frame</span><span class="o">=</span><span class="n">train</span><span class="p">,</span>
-    <span class="n">validation_frame</span><span class="o">=</span><span class="n">valid</span>
-<span class="p">)</span>
-
-<span class="c1"># save the model</span>
-<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">MODELS_PATH</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">download_mojo</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">MODELS_PATH</span><span class="p">)</span>
-
-<span class="n">h2o</span><span class="o">.</span><span class="n">cluster</span><span class="p">()</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>After preparation our dataset of domains should looks like this.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">domains</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="go">                 host         domain class subclass length  entropy vowel_proportion malicious</span>
+<span class="go">0 000directory.com.ar   000directory legit    legit     12 3.022055         0.250000     False</span>
+<span class="go">1      000webhost.com     000webhost legit    legit     10 2.846439         0.200000     False</span>
+<span class="go">2         001fans.com        001fans legit    legit      7 2.521641         0.142857     False</span>
+<span class="go">3  01-telecharger.com 01-telecharger legit    legit     14 3.324863         0.285714     False</span>
+<span class="go">4      010shangpu.com     010shangpu legit    legit     10 3.121928         0.200000     False</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The aim of this tutorial is to show the integration of the ML Model
-Manager Client into the machine learning process not the development of
-an optimal and accurate machine learning model.</p>
+<p>Be aware that our dataset is a <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a>.</p>
+</div>
+<p>We are now ready to build the model. We will rely on a
+<a class="reference external" href="https://keras.io/guides/sequential_model/">Keras Sequential model</a> for that.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
+    <span class="mi">10</span><span class="p">,</span>
+    <span class="n">input_dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">,</span>
+    <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">,</span>
+    <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.3</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
+    <span class="mi">7</span><span class="p">,</span>
+    <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">,</span>
+    <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">,</span>
+    <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l1_l2</span><span class="p">(</span><span class="n">l1</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">l2</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+<span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.3</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
+    <span class="mi">5</span><span class="p">,</span>
+    <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">,</span>
+    <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;he_normal&#39;</span><span class="p">,</span>
+    <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l1_l2</span><span class="p">(</span><span class="n">l1</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">l2</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+<span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Before we can train our model we have to properly transform the data for <cite>Keras</cite>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;malicious&#39;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+    <span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;subclass&#39;</span><span class="p">,</span> <span class="s1">&#39;malicious&#39;</span><span class="p">],</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="c1"># Keras requires your output feature to be one-hot encoded values.</span>
+<span class="n">lbl_clf</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">Y_final</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">lbl_clf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Let’s train our model with our transformed datasets, <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y_final</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span>
+    <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span> <span class="p">,</span> <span class="n">Y_final</span> <span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="n">batch_size</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You will see the progress of the training in the output, something like this.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;</span>
+<span class="go">Epoch 1/10</span>
+<span class="go">19133/19133 [==============================] - 59s 3ms/step - loss: 0.4520 - accuracy: 0.8100</span>
+<span class="go">Epoch 2/10</span>
+<span class="go">19133/19133 [==============================] - 58s 3ms/step - loss: 0.4413 - accuracy: 0.8037</span>
+<span class="go">Epoch 3/10</span>
+<span class="go">19133/19133 [==============================] - 54s 3ms/step - loss: 0.4282 - accuracy: 0.8098</span>
+<span class="go">Epoch 4/10</span>
+<span class="go">19133/19133 [==============================] - 54s 3ms/step - loss: 0.4301 - accuracy: 0.8098</span>
+<span class="go">Epoch 5/10</span>
+<span class="go">19133/19133 [==============================] - 55s 3ms/step - loss: 0.4299 - accuracy: 0.8085</span>
+<span class="go">Epoch 6/10</span>
+<span class="go">19133/19133 [==============================] - 55s 3ms/step - loss: 0.4249 - accuracy: 0.8124</span>
+<span class="go">Epoch 7/10</span>
+<span class="go">19133/19133 [==============================] - 54s 3ms/step - loss: 0.4284 - accuracy: 0.8101</span>
+<span class="go">Epoch 8/10</span>
+<span class="go">19133/19133 [==============================] - 57s 3ms/step - loss: 0.4292 - accuracy: 0.8083</span>
+<span class="go">Epoch 9/10</span>
+<span class="go">19133/19133 [==============================] - 58s 3ms/step - loss: 0.4295 - accuracy: 0.8096</span>
+<span class="go">Epoch 10/10</span>
+<span class="go">19133/19133 [==============================] - 57s 3ms/step - loss: 0.4278 - accuracy: 0.8091</span>
+<span class="go">&lt;keras.callbacks.History at 0x7f02e1620610&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <cite>Keras framework</cite> is beyond the scope of this tutorial, please, refer
+to <a class="reference external" href="https://keras.io/api/">Keras API reference</a> to learn more.</p>
 </div>
 </section>
 <section id="register-the-model">
 <h2>Register the model<a class="headerlink" href="#register-the-model" title="Permalink to this heading">#</a></h2>
-<p>Once the model has been developed and saved, it must be registered on the
-Devo platform in order to exploit it. For this we will use the ML Model Manager
-Client.</p>
+<p>In order to register the model in Devo we need to transform it to <cite>ONNX</cite> format
+first.</p>
+<p>We will use the
+<a class="reference external" href="https://onnxruntime.ai/docs/tutorials/tf-get-started.html">tf2onnx</a>
+tool to convert our <cite>Keras</cite> model to <cite>ONNX</cite>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tf2onnx</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">from_keras</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">opset</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">output_path</span><span class="o">=</span><span class="n">MODEL_FILE</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once the model has been transformed and saved, it must be registered on the
+Devo platform in order to exploit it.</p>
+<p>We will use the ML Model Manager Client for that.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># create the mlmm client</span>
 <span class="n">mlmm</span> <span class="o">=</span> <span class="n">create_client_from_token</span><span class="p">(</span><span class="n">DEVO_MLMM_URL</span><span class="p">,</span> <span class="n">TOKEN</span><span class="p">)</span>
 
 <span class="c1"># register the model</span>
 <span class="n">mlmm</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span>
     <span class="n">NAME</span><span class="p">,</span>
-    <span class="n">engines</span><span class="o">.</span><span class="n">H2O</span><span class="p">,</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">MODELS_PATH</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">NAME</span><span class="si">}</span><span class="s2">.zip&quot;</span><span class="p">),</span>
+    <span class="n">engines</span><span class="o">.</span><span class="n">ONNX</span><span class="p">,</span>
+    <span class="n">MODEL_FILE</span><span class="p">,</span>
     <span class="n">description</span><span class="o">=</span><span class="n">DESCRIPTION</span><span class="p">,</span>
     <span class="n">force</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
@@ -368,14 +445,15 @@ Client.</p>
 <p>Refer to <a class="reference internal" href="../user_guide/index.html#user-s-guide"><span class="std std-ref">User’s Guide</span></a> of this documentation to learn
 more about the ML Model Manager Client.</p>
 </div>
-<p>So far we have everything ready to exploit our model.</p>
+<p>So far we have everything ready to exploit our model, i.e. to detect
+malicious domains.</p>
 </section>
 <section id="classify-domains">
 <h2>Classify domains<a class="headerlink" href="#classify-domains" title="Permalink to this heading">#</a></h2>
-<p>One way to evaluate a model is by querying a table and the
-<code class="docutils literal notranslate"><span class="pre">mlevalmodel(...)</span></code> operator available in the Devo query engine capable
-of evaluating machine learning models.</p>
-<p>We are going to use the <em>demo.ecommerce.data</em> table, which contains the
+<p>One way to evaluate a model is to use the <code class="docutils literal notranslate"><span class="pre">mlevalmodel(...)</span></code> operator when
+querying a table. The <code class="docutils literal notranslate"><span class="pre">mlevalmodel(...)</span></code> operator is capable of evaluating
+machine learning models and is available in the Devo query engine.</p>
+<p>We are going to use the <code class="docutils literal notranslate"><span class="pre">demo.ecommerce.data</span></code> table, which contains the
 <code class="docutils literal notranslate"><span class="pre">referralUri</span></code> field, from which we can extract the domain we want to check.</p>
 <p>A query that might be worthwhile would be something like this.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;from demo.ecommerce.data</span>
@@ -383,7 +461,8 @@ of evaluating machine learning models.</p>
 <span class="s1">  float(length(domain)) as length,</span>
 <span class="s1">  shannonentropy(domain) as entropy,</span>
 <span class="s1">  float(countbyfilter(domain, &quot;</span><span class="si">{</span><span class="n">VOWELS</span><span class="si">}</span><span class="s1">&quot;)) as vowel_proportion,</span>
-<span class="s1">  mlevalmodel(&quot;</span><span class="si">{</span><span class="n">DOMAIN</span><span class="si">}</span><span class="s1">&quot;, &quot;</span><span class="si">{</span><span class="n">NAME</span><span class="si">}</span><span class="s1">&quot;, length, entropy, vowel_proportion) as class</span>
+<span class="s1">  at(mlevalmodel(&quot;</span><span class="si">{</span><span class="n">DOMAIN</span><span class="si">}</span><span class="s1">&quot;, &quot;</span><span class="si">{</span><span class="n">NAME</span><span class="si">}</span><span class="s1">&quot;, [float4(length), float4(vowel_proportion)]),0) as res,</span>
+<span class="s1">  ifthenelse(res&gt;0.5, &quot;false&quot;, &quot;true&quot;) as isMalicious</span>
 <span class="s1">&#39;&#39;&#39;</span>
 </pre></div>
 </div>
@@ -393,7 +472,8 @@ of evaluating machine learning models.</p>
 to learn more about queries.</p>
 </div>
 <p>Well, now we just need to create an access to the Devo API and launch the
-query. With the <a class="reference external" href="https://github.com/DevoInc/python-sdk">Devo Python SDK</a>,
+query.</p>
+<p>With the <a class="reference external" href="https://github.com/DevoInc/python-sdk">Devo Python SDK</a>,
 among other features, we can execute queries against the Devo platform easily
 and securely.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a Devo API client</span>
@@ -410,7 +490,16 @@ and securely.</p>
 <span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">dates</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;from&#39;</span><span class="p">:</span> <span class="s2">&quot;now()-1*hour()&quot;</span><span class="p">})</span>
 
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;domain: &quot;</span><span class="p">,</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">],</span> <span class="s2">&quot;isMalicious:&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;isMalicious&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>You will see a result like the following depending on the contents of the
+<code class="docutils literal notranslate"><span class="pre">demo.ecommerce.data</span></code> table.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;</span>
+<span class="go">domain:  www.logcasts.com isMalicious: false</span>
+<span class="go">domain:  www.google.com isMalicious: false</span>
+<span class="go">domain:  www.logtrust.com isMalicious: false</span>
+<span class="gp">...</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -426,23 +515,23 @@ to learn more about the Devo Query API.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="dga-domain-classifier-keras-onnx.html">
+          <a class="next-page" href="ecommerce_clustering.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">DGA domain classifier (Keras-ONNX)</div>
+                <div class="title">Ecommerce Clustering</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="index.html">
+          <a class="prev-page" href="dga-domain-classifier.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Tutorials</div>
+                <div class="title">DGA domain classifier</div>
                 
               </div>
             </a>
@@ -476,7 +565,7 @@ to learn more about the Devo Query API.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">DGA domain classifier</a><ul>
+<li><a class="reference internal" href="#">DGA domain classifier (Keras-ONNX)</a><ul>
 <li><a class="reference internal" href="#build-the-model">Build the model</a></li>
 <li><a class="reference internal" href="#register-the-model">Register the model</a></li>
 <li><a class="reference internal" href="#classify-domains">Classify domains</a></li>

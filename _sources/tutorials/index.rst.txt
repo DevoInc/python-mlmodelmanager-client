@@ -9,4 +9,5 @@ Manager Client in the process of development a ML model.
     :caption: Contents
 
     dga-domain-classifier
+    dga-domain-classifier-keras-onnx
     ecommerce_clustering
