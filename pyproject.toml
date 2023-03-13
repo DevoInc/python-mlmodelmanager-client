@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "devo-mlmodelmanager"
-version = "1.5.0"
+version = "1.5.1"
 description = "A client for Devo's ML model manager"
 authors = ["Devo ML Team <machine.learning@devo.com>"]
 license = "MIT"
