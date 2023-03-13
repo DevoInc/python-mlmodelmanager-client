@@ -1,5 +1,5 @@
-DGA domain scoring (GB-ONNX)
-============================
+DGA domain scoring (GBM-ONNX)
+=============================
 
 This tutorial shows how to perform real-time `DGA` domain classification using
 a machine learning model to have as output the classification probability
@@ -17,7 +17,7 @@ platform and exploit it through Devo query engine.
 .. note::
 
     `The tutorial is available as a Jupyter notebook
-    <https://github.com/DevoInc/python-mlmodelmanager-client/blob/main/notebooks/dga-domain-scoring-gb-onnx.ipynb>`_.
+    <https://github.com/DevoInc/python-mlmodelmanager-client/blob/main/notebooks/dga-domain-scoring-gbm-onnx.ipynb>`_.
 
 Requirements
 ------------
