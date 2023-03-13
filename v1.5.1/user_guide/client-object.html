@@ -1,0 +1,709 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Functions Facade" href="functions-facade.html" /><link rel="prev" title="Installation" href="installation.html" />
+
+    <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+        <title>Client Object - ML Model Manager Client documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">ML Model Manager Client  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">ML Model Manager Client  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">User’s Guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Client Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions-facade.html">Functions Facade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication.html">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="downloaders.html">Downloaders</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/dga-domain-classifier.html">DGA domain classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/dga-domain-classifier-keras-onnx.html">DGA domain classifier (Keras-ONNX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/dga-domain-scoring-gb-onnx.html">DGA domain scoring (GB-ONNX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/entity-classification-kmeans-onnx.html">Entity classification (kmeans-ONNX)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_reference/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/modelmanager.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.api</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/auth.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.auth</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/downloader.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.downloader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/engines.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.engines</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/error.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.error</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/profile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.profile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/validator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.validator</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="client-object">
+<h1>Client Object<a class="headerlink" href="#client-object" title="Permalink to this heading">#</a></h1>
+<p>This section explains how to use a client to manage the models of a ML Model
+Manager server.</p>
+<section id="create">
+<h2>Create<a class="headerlink" href="#create" title="Permalink to this heading">#</a></h2>
+<p>To use a <a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.Client" title="devo_ml.modelmanager.Client"><code class="xref py py-class docutils literal notranslate"><span class="pre">Client</span></code></a> you need the URL of the
+ML Model Manager server and an authentication based on a token.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager.auth</span> <span class="kn">import</span> <span class="n">HttpDevoStandAloneTokenAuth</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auth</span> <span class="o">=</span> <span class="n">HttpDevoStandAloneTokenAuth</span><span class="p">(</span><span class="s2">&quot;8a3vf98ai28sar1234lkj2l43td6f89a&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;http://localhost&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span>
+<span class="go">&lt;devo_ml.modelmanager._client.Client object at 0x7fa773450490&gt;</span>
+</pre></div>
+</div>
+<p>Now you have a <a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.Client" title="devo_ml.modelmanager.Client"><code class="xref py py-class docutils literal notranslate"><span class="pre">Client</span></code></a> ready to use to
+manage models of the server <cite>http://localhost</cite>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The token used above is not a valid token, don’t try to use it with a real
+server.</p>
+</div>
+<p>Don’t worry about <a class="reference external" href="https://requests.readthedocs.io/en/latest/user/authentication/#authentication" title="(in Requests v2.28.2)"><span class="xref std std-ref">authentication</span></a>, we’ll get into it a
+bit later. Just be aware that we have created a client with the Devo’s
+<code class="docutils literal notranslate"><span class="pre">standAloneToken</span></code> token scheme to authenticate, which is the default
+authentication method.</p>
+<p>In this example we don’t tell the client to use any
+<a class="reference internal" href="downloaders.html#downloaders"><span class="std std-ref">downloader</span></a> via the constructor
+keyword <cite>downloader</cite>. In that case a
+<a class="reference internal" href="../api_reference/downloader.html#devo_ml.modelmanager.downloader.FileSystemDownloader" title="devo_ml.modelmanager.downloader.FileSystemDownloader"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileSystemDownloader</span></code></a>
+will be used as a fallback downloader with the current directory as path.
+Neither you don’t need to worry about downloaders right now because most of the
+time the default downloader is fine, but you could create a client with your
+custom downloader.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager.downloader</span> <span class="kn">import</span> <span class="n">FileSystemDownloader</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">downloader</span> <span class="o">=</span> <span class="n">FileSystemDownloader</span><span class="p">(</span><span class="s2">&quot;~/download/models&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;http://localhost&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="p">,</span> <span class="n">downloader</span><span class="o">=</span><span class="n">downloader</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>Additionally the client accept a set of keywords that will be passing to the
+underlying requests call. These keywords are the supported options by the
+<a class="reference external" href="https://requests.readthedocs.io/en/latest/" title="(in Requests v2.28.2)"><span class="xref std std-doc">Requests</span></a> library. For example, to set a <cite>timeout</cite>
+you could do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;http://localhost&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A default <cite>timeout</cite> of <cite>30s</cite> is used by the client.</p>
+</div>
+<section id="what-domain-i-am-connecting-to">
+<h3>What domain I am connecting to?<a class="headerlink" href="#what-domain-i-am-connecting-to" title="Permalink to this heading">#</a></h3>
+<p>As you may have noticed in the example above it has not been indicated which
+domain we want to connect to the client.</p>
+<p>Since version <code class="docutils literal notranslate"><span class="pre">2.4.0</span></code> and above of the ML Model Manager server the domain
+is inferred from the access token, therefore, the token you use in the
+authentication will establish the domain you are connecting to.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To learn more about tokens and how to get one visit the
+<a class="reference external" href="https://docs.devo.com/space/latest/94763821/Authentication+tokens">DEVO [.docs]</a></p>
+</div>
+</section>
+</section>
+<section id="adding-models">
+<h2>Adding Models<a class="headerlink" href="#adding-models" title="Permalink to this heading">#</a></h2>
+<p>The most frequent operation a data scientist will do with the client is
+probably to add theirs models once they have been implemented, optimized,
+trained, validated…</p>
+<p><a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.Client.add_model" title="devo_ml.modelmanager.Client.add_model"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Client.add_model</span></code></a> allows you to
+create new models.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><p><strong>name</strong>: The name of the model.</p></li>
+<li><p><strong>engine</strong>: The engine of the model.</p></li>
+<li><p><strong>model_file</strong>: The file path to the model file.</p></li>
+<li><p><strong>description</strong> <em>(Optional)</em>: A brief description of the model. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><strong>force</strong> <em>(Optional)</em>: Whether to override the model. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;pokemon_onnx_regression&quot;</span><span class="p">,</span>          <span class="c1"># name</span>
+<span class="gp">... </span>    <span class="s2">&quot;ONNX&quot;</span><span class="p">,</span>                             <span class="c1"># engine</span>
+<span class="gp">... </span>    <span class="s2">&quot;~/models/pokemon.onnx&quot;</span><span class="p">,</span>            <span class="c1"># model_file</span>
+<span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A funny Pokemon prediction&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>If the model you are trying to add already exists in the system, a
+<a class="reference internal" href="../api_reference/error.html#devo_ml.modelmanager.error.ModelAlreadyExists" title="devo_ml.modelmanager.error.ModelAlreadyExists"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModelAlreadyExists</span></code></a> error
+will be thrown.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span><span class="s2">&quot;existing_model_name&quot;</span><span class="p">,</span> <span class="s2">&quot;H2O&quot;</span><span class="p">,</span> <span class="s2">&quot;~/models/m.json&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;.../devo_ml/modelmanager/client.py&quot;</span>, line <span class="m">67</span>, in <span class="n">add_model</span>
+<span class="w">    </span><span class="k">raise</span> <span class="n">ModelAlreadyExists</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="gr">devo_ml.modelmanager.error.ModelAlreadyExists</span>: <span class="n">&#39;existing_model_name&#39;</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>This is correct, as it is not possible to add a model with the same name as an
+existing one. But, if you would like or need to overwrite a model, you can do it.
+You just have to specify it explicitly with <code class="docutils literal notranslate"><span class="pre">force</span></code> parameter set to <code class="docutils literal notranslate"><span class="pre">True</span></code>,
+e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span><span class="s2">&quot;pokemon_onnx_regression&quot;</span><span class="p">,</span> <span class="s2">&quot;ONNX&quot;</span><span class="p">,</span> <span class="s2">&quot;~/models/pokemon.onnx&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>The <cite>force</cite> parameter, tells the system that we want to add the model and in
+case it already exists, update it. Note that only the fields: <cite>engine,
+description (if anything other than None is passed) and the model file</cite> will be
+updated. The rest of the model fields are auto calculated or inferred by the
+system and it is not possible to set an arbitrary value by the user.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is the user’s responsibility to ensure the match between the specified
+engine and the uploaded file. Note that the engine tells the system how to
+process the file.</p>
+</div>
+</section>
+<section id="querying-models">
+<h2>Querying Models<a class="headerlink" href="#querying-models" title="Permalink to this heading">#</a></h2>
+<p>Other operation that is usually of interest is to query the data of a model.</p>
+<p><a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.Client.get_model" title="devo_ml.modelmanager.Client.get_model"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Client.get_model</span></code></a> allows you to
+query the data of an existing model.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><p><strong>name</strong>: Name of the model to query.</p></li>
+<li><p><strong>download_file</strong> <em>(Optional)</em>: Whether download the model file. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;pokemon_onnx_regression&quot;</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">   &#39;id&#39;: 35,</span>
+<span class="go">   &#39;name&#39;: &#39;pokemon_onnx_regression&#39;,</span>
+<span class="go">   &#39;engine&#39;: &#39;ONNX&#39;,</span>
+<span class="go">   &#39;description&#39;: &#39;A funny Pokemon prediction&#39;,</span>
+<span class="go">   ...</span>
+<span class="go">}</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>If the model you are trying to query does not exists, a
+<a class="reference internal" href="../api_reference/error.html#devo_ml.modelmanager.error.ModelNotFound" title="devo_ml.modelmanager.error.ModelNotFound"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModelNotFound</span></code></a> error will be thrown.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;non_existing_model_name&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;.../devo_ml/modelmanager/client.py&quot;</span>, line <span class="m">42</span>, in <span class="n">get_model</span>
+<span class="w">    </span><span class="k">raise</span> <span class="n">ModelNotFound</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="gr">devo_ml.modelmanager.error.ModelNotFound</span>: <span class="n">&#39;non_existing_model_name&#39;</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>The <cite>download_file</cite> parameter sets whether to download the model file through
+the inner <a class="reference internal" href="downloaders.html#downloaders"><span class="std std-ref">downloader</span></a> of the client.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;pokemon_onnx_regression&quot;</span><span class="p">,</span> <span class="n">download_file</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.Client.find_model" title="devo_ml.modelmanager.Client.find_model"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Client.find_model</span></code></a> is an alternative
+to get a model. It behaves the same as <cite>get_model</cite> except it returns <code class="docutils literal notranslate"><span class="pre">None</span></code>
+instead of throw an error if the model doesn’t exists. It is a convenient way to
+get the model data without the need of catching errors.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><p><strong>name</strong>: Name of the model to query.</p></li>
+<li><p><strong>download_file</strong> <em>(Optional)</em>: Whether download the model file. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">find_model</span><span class="p">(</span><span class="s2">&quot;non_existing_model_name&quot;</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.Client.get_models" title="devo_ml.modelmanager.Client.get_models"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Client.get_models</span></code></a> allows you
+retrieve a list of all the models in the system. Note that <cite>get_models</cite> doesn’t
+allow downloading model files.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_models</span><span class="p">()</span>
+<span class="go">[</span>
+<span class="go">    {</span>
+<span class="go">        &#39;id&#39;: 35,</span>
+<span class="go">        &#39;name&#39;: &#39;pokemon_onnx_regression&#39;,</span>
+<span class="go">        &#39;engine&#39;: &#39;ONNX&#39;,</span>
+<span class="go">        &#39;description&#39;: &#39;A funny Pokemon prediction&#39;,</span>
+<span class="go">        ...</span>
+<span class="go">    }, {</span>
+<span class="go">        &#39;id&#39;: 36,</span>
+<span class="go">        &#39;name&#39;: &#39;credit_card_gjp&#39;,</span>
+<span class="go">        &#39;engine&#39;: &#39;H2O&#39;,</span>
+<span class="go">        &#39;description&#39;: &#39;gjp model on credit card fraud dataset&#39;,</span>
+<span class="go">        ...</span>
+<span class="go">    }, {</span>
+<span class="go">    ...</span>
+<span class="go">]</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="legacy-client">
+<h2>Legacy Client<a class="headerlink" href="#legacy-client" title="Permalink to this heading">#</a></h2>
+<p>In order to access servers prio to <code class="docutils literal notranslate"><span class="pre">2.4.0</span></code> you must use the
+<a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.LegacyClient" title="devo_ml.modelmanager.LegacyClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">LegacyClient</span></code></a>. This is due to these
+servers can’t inferred the domain from the access token, so we need to pass it
+in the constructor.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager</span> <span class="kn">import</span> <span class="n">LegacyClient</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager.auth</span> <span class="kn">import</span> <span class="n">HttpDevoStandAloneTokenAuth</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auth</span> <span class="o">=</span> <span class="n">HttpDevoStandAloneTokenAuth</span><span class="p">(</span><span class="s2">&quot;8a3vf98ai28sar1234lkj2l43td6f89a&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">LegacyClient</span><span class="p">(</span><span class="s2">&quot;http://localhost&quot;</span><span class="p">,</span> <span class="s2">&quot;self&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span>
+<span class="go">&lt;devo_ml.modelmanager._client.LegacyClient object at 0x7fa773450490&gt;</span>
+</pre></div>
+</div>
+<p>Note that we are connecting the client to the domain <code class="docutils literal notranslate"><span class="pre">self</span></code> not matter the
+domain referred by the token.</p>
+<p>All explained for the <a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.Client" title="devo_ml.modelmanager.Client"><code class="xref py py-class docutils literal notranslate"><span class="pre">Client</span></code></a> is applicable
+to the <a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.LegacyClient" title="devo_ml.modelmanager.LegacyClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">LegacyClient</span></code></a>, both expose the
+same interface to the user in order to adding and querying models.</p>
+<section id="how-do-i-know-which-client-to-use">
+<h3>How do I know which client to use?<a class="headerlink" href="#how-do-i-know-which-client-to-use" title="Permalink to this heading">#</a></h3>
+<p>If you are not sure which client to use you can start by using the
+<a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.Client" title="devo_ml.modelmanager.Client"><code class="xref py py-class docutils literal notranslate"><span class="pre">Client</span></code></a> and verify that you can get the
+models without errors. If a
+<a class="reference internal" href="../api_reference/error.html#devo_ml.modelmanager.error.ModelManagerError" title="devo_ml.modelmanager.error.ModelManagerError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModelManagerError[404]</span></code></a> is
+thrown it means that the server doesn’t support the endpoints accessed by the client
+and you need to use the <a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.LegacyClient" title="devo_ml.modelmanager.LegacyClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">LegacyClient</span></code></a>
+passing in the target domain.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager.auth</span> <span class="kn">import</span> <span class="n">HttpDevoStandAloneTokenAuth</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auth</span> <span class="o">=</span> <span class="n">HttpDevoStandAloneTokenAuth</span><span class="p">(</span><span class="s2">&quot;8a3vf98ai28sar1234lkj2l43td6f89a&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;http://localhost&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get_models</span><span class="p">()</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;.../devo_ml/modelmanager/client.py&quot;</span>, line <span class="m">34</span>, in <span class="n">get_models</span>
+<span class="w">    </span><span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">endpoints</span><span class="o">.</span><span class="n">models</span><span class="p">())</span>
+  File <span class="nb">&quot;.../devo_ml/modelmanager/api.py&quot;</span>, line <span class="m">89</span>, in <span class="n">__call__</span>
+<span class="w">    </span><span class="n">validate_or_raise_error</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">decoded_response</span><span class="p">)</span>
+  File <span class="nb">&quot;.../devo_ml/modelmanager/api.py&quot;</span>, line <span class="m">40</span>, in <span class="n">validate_or_raise_error</span>
+<span class="w">    </span><span class="k">raise</span> <span class="n">ModelManagerError</span><span class="o">.</span><span class="n">from_code</span><span class="p">(</span>
+<span class="gr">devo_ml.modelmanager.error.ModelManagerError</span>: <span class="n">404: HTTP 404 Not Found</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="factories">
+<h2>Factories<a class="headerlink" href="#factories" title="Permalink to this heading">#</a></h2>
+<p>To simplify the creation of clients, the library provides functions that allow
+you to create clients with the most commonly used configurations in a single
+step.</p>
+<section id="create-client-from-token">
+<h3>Create Client From Token<a class="headerlink" href="#create-client-from-token" title="Permalink to this heading">#</a></h3>
+<p>The factory
+<a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.create_client_from_token" title="devo_ml.modelmanager.create_client_from_token"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_client_from_token</span></code></a>
+allows you to create a ready to use <a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.Client" title="devo_ml.modelmanager.Client"><code class="xref py py-class docutils literal notranslate"><span class="pre">Client</span></code></a>
+when you have a valid access token.</p>
+<p>Instead of this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager.auth</span> <span class="kn">import</span> <span class="n">HttpDevoStandAloneTokenAuth</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auth</span> <span class="o">=</span> <span class="n">HttpDevoStandAloneTokenAuth</span><span class="p">(</span><span class="s2">&quot;8a3vf98ai28sar1234lkj2l43td6f89a&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;http://localhost&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You could do a cleaner one line code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager</span> <span class="kn">import</span> <span class="n">create_client_from_token</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">create_client_from_token</span><span class="p">(</span><span class="s2">&quot;http://localhost&quot;</span><span class="p">,</span> <span class="s2">&quot;8a3vf98ai28sar1234lkj2l43td6f89a&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This creates a <a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.Client" title="devo_ml.modelmanager.Client"><code class="xref py py-class docutils literal notranslate"><span class="pre">Client</span></code></a> to <cite>http://localhost</cite>
+with Devo’s <code class="docutils literal notranslate"><span class="pre">standAloneToken</span></code> token authentication.</p>
+<p>You can set the type of authentication to use in the parameter <cite>auth_type</cite>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">standalone</span></code> to use <a class="reference internal" href="../api_reference/auth.html#devo_ml.modelmanager.auth.HttpDevoStandAloneTokenAuth" title="devo_ml.modelmanager.auth.HttpDevoStandAloneTokenAuth"><code class="xref py py-class docutils literal notranslate"><span class="pre">HttpDevoStandAloneTokenAuth</span></code></a> <em>(default)</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bearer</span></code> to use <a class="reference internal" href="../api_reference/auth.html#devo_ml.modelmanager.auth.HttpDevoBearerTokenAuth" title="devo_ml.modelmanager.auth.HttpDevoBearerTokenAuth"><code class="xref py py-class docutils literal notranslate"><span class="pre">HttpDevoBearerTokenAuth</span></code></a>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use constants rather than literals;
+<a class="reference internal" href="../api_reference/auth.html#devo_ml.modelmanager.auth.STANDALONE" title="devo_ml.modelmanager.auth.STANDALONE"><code class="xref py py-const docutils literal notranslate"><span class="pre">STANDALONE</span></code></a> or
+<a class="reference internal" href="../api_reference/auth.html#devo_ml.modelmanager.auth.BEARER" title="devo_ml.modelmanager.auth.BEARER"><code class="xref py py-const docutils literal notranslate"><span class="pre">BEARER</span></code></a>.</p>
+</div>
+<p>The <cite>download_path</cite> parameter allows you to setup the client downloader, but
+note that you cannot use your own downloaders when creating clients with the
+factory. A <a class="reference internal" href="../api_reference/downloader.html#devo_ml.modelmanager.downloader.FileSystemDownloader" title="devo_ml.modelmanager.downloader.FileSystemDownloader"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileSystemDownloader</span></code></a>
+is used as the downloader.</p>
+<p>You can also use keywords to tune the underlying request.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager.auth</span> <span class="kn">import</span> <span class="n">BEARER</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager</span> <span class="kn">import</span> <span class="n">create_client_from_token</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">create_client_from_token</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;https://testing_url&quot;</span><span class="p">,</span>                  <span class="c1"># url</span>
+<span class="gp">... </span>    <span class="s2">&quot;8a3vf98ai28sar1234lkj2l43td6f89a&quot;</span><span class="p">,</span>     <span class="c1"># token</span>
+<span class="gp">... </span>    <span class="n">auth_type</span><span class="o">=</span><span class="n">BEARER</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">download_path</span><span class="o">=</span><span class="s2">&quot;~/models&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">timeout</span><span class="o">=</span><span class="mi">45</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="create-client-from-profile">
+<h3>Create Client From Profile<a class="headerlink" href="#create-client-from-profile" title="Permalink to this heading">#</a></h3>
+<p>The factory
+<a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.create_client_from_profile" title="devo_ml.modelmanager.create_client_from_profile"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_client_from_profile</span></code></a>
+allows you to setup several client configurations in one place and instantiate one
+of those easily. It is useful when you have for example many environments you want to access.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager</span> <span class="kn">import</span> <span class="n">create_client_from_profile</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">create_client_from_profile</span><span class="p">(</span><span class="s2">&quot;testing&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;profiles.ini&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this case we are telling the factory to create a
+<a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.Client" title="devo_ml.modelmanager.Client"><code class="xref py py-class docutils literal notranslate"><span class="pre">Client</span></code></a> based on the profile <cite>testing</cite>
+located in the file <cite>profiles.ini</cite> of the current directory.</p>
+<p>The parameter <cite>path</cite> not only accepts file names, it could be; a file name e.g.
+<cite>profiles.ini</cite>, a file path e.g. <cite>~/ml/config/profiles.ini</cite> or a path e.g:
+<cite>~/ml/config</cite>. Whatever the value is, the factory knows how to deal with it.</p>
+<p>If you noticed, the parameter <cite>path</cite> is optional, so how does the factory know
+where to look for a profile file if the path is not provided?. This is thanks
+to the predefined set of paths where to look for the file.</p>
+<p>The factory has two predefined paths where to look for a profile file;
+the current directory and the user’s home directory. It also adds the path
+provided, if any. So the sequence of directories to look for a profile file is:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>path</cite> if provided.</p></li>
+<li><p>current directory, <code class="docutils literal notranslate"><span class="pre">.</span></code>.</p></li>
+<li><p>user’s home directory, <code class="docutils literal notranslate"><span class="pre">/home/&lt;user&gt;/</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<p>If <cite>path</cite> referrer a file name it will search for that file in every directory
+of the set of paths, otherwise if it referrer a path it perform the same
+process using <cite>modelmanager.ini</cite> as a file name. In this way you could just
+create a file <cite>modelmanager.ini</cite> with your profiles, place it in the current
+directory or in your home directory and create a client without the param
+<cite>path</cite>. You can also use keywords to tune the underlying request.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager</span> <span class="kn">import</span> <span class="n">create_client_from_profile</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">create_client_from_profile</span><span class="p">(</span><span class="s2">&quot;testing&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="what-are-the-profile-files-like">
+<h4>What are the profile files like?<a class="headerlink" href="#what-are-the-profile-files-like" title="Permalink to this heading">#</a></h4>
+<p>Profiles files are INI files compatible with the built-int Python
+<a class="reference external" href="https://docs.python.org/3/library/configparser.html" title="(in Python v3.11)"><span class="xref std std-doc">ConfigParser</span></a> module, capable of parsing
+a kind of <cite>Microsoft Windows INI</cite> files. Let’s see an example.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[dev]</span>
+<span class="na">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://dev_url</span>
+<span class="na">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">8a3vf98ai28sar1234lkj2l43td6f89a</span>
+<span class="na">auth_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">standalone</span>
+<span class="na">download_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">~/models</span>
+
+<span class="k">[testing]</span>
+<span class="na">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://testing_url</span>
+<span class="na">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">26ab4c69f641bd3622a3b59bc09f781c</span>
+<span class="na">auth_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">standalone</span>
+<span class="na">download_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">~/models</span>
+</pre></div>
+</div>
+<p>We have defined two profiles: <cite>dev</cite> and <cite>testing</cite>. Each of them have a set of
+allowed attributes:</p>
+<blockquote>
+<div><ul>
+<li><p><strong>url</strong>: The URL of the server.</p></li>
+<li><p><strong>token</strong>: The access token to authenticate.</p></li>
+<li><p><strong>auth_type</strong> <em>(Optional)</em>: The auth type; <code class="docutils literal notranslate"><span class="pre">standalone</span></code> or <code class="docutils literal notranslate"><span class="pre">bearer</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">standalone</span></code>.</p></li>
+<li><div class="line-block">
+<div class="line"><strong>download_path</strong> <em>(Optional)</em>: The path to download model files. Fallback
+in the default downloader if is not provided.</div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+<p>You can setup as many profiles as you want as they are referrer by name.</p>
+<p>The <cite>download_path</cite> profile attribute allows you to setup the client downloader,
+but note that you cannot use your own downloaders when creating clients with the
+factory. A <a class="reference internal" href="../api_reference/downloader.html#devo_ml.modelmanager.downloader.FileSystemDownloader" title="devo_ml.modelmanager.downloader.FileSystemDownloader"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileSystemDownloader</span></code></a>
+is used as the downloader.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note the lack of quotes surrounding the values. Putting them will be an
+error or unwanted values.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">:</span></code> instead of <code class="docutils literal notranslate"><span class="pre">=</span></code> as attribute <cite>key-value</cite> separator,
+they are interchangeable.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="functions-facade.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Functions Facade</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="installation.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Installation</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, Devo ML Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Client Object</a><ul>
+<li><a class="reference internal" href="#create">Create</a><ul>
+<li><a class="reference internal" href="#what-domain-i-am-connecting-to">What domain I am connecting to?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#adding-models">Adding Models</a></li>
+<li><a class="reference internal" href="#querying-models">Querying Models</a></li>
+<li><a class="reference internal" href="#legacy-client">Legacy Client</a><ul>
+<li><a class="reference internal" href="#how-do-i-know-which-client-to-use">How do I know which client to use?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#factories">Factories</a><ul>
+<li><a class="reference internal" href="#create-client-from-token">Create Client From Token</a></li>
+<li><a class="reference internal" href="#create-client-from-profile">Create Client From Profile</a><ul>
+<li><a class="reference internal" href="#what-are-the-profile-files-like">What are the profile files like?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    </body>
+</html>
