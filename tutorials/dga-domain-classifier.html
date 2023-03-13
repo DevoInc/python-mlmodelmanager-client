@@ -167,7 +167,7 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">DGA domain classifier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dga-domain-classifier-keras-onnx.html">DGA domain classifier (Keras-ONNX)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ecommerce_clustering.html">Ecommerce Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entity-classification-kmeans-onnx.html">Entity classification (kmeans-ONNX)</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../api_reference/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -238,8 +238,17 @@ evaluate and classify in real time the domains in the table using a query.</p>
 <p class="admonition-title">Note</p>
 <p><a class="reference external" href="https://github.com/DevoInc/python-mlmodelmanager-client/blob/main/notebooks/dga-domain-classifier.ipynb">The tutorial is available as a Jupyter notebook</a>.</p>
 </div>
-<section id="build-the-model">
-<h2>Build the model<a class="headerlink" href="#build-the-model" title="Permalink to this heading">#</a></h2>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Python &gt;= 3.7.</p></li>
+<li><p>Devo table <code class="docutils literal notranslate"><span class="pre">demo.ecommerce.data</span></code>.</p></li>
+</ul>
+<p>It is recommended for convenience to create a virtual environment to run the
+tutorial or use the notebook provided.</p>
+</section>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h2>
 <p>Let’s start by installing the required packages.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>devo-sdk
 $<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>devo-mlmodelmanager
@@ -257,7 +266,7 @@ $<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </sp
 </div>
 <p>Declare some constants for convenience in the code.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># A valid Devo access token</span>
-<span class="n">TOKEN</span> <span class="o">=</span> <span class="s1">&#39;&lt;your_token_here&gt;&#39;</span>
+<span class="n">DEVO_TOKEN</span> <span class="o">=</span> <span class="s1">&#39;&lt;your_token_here&gt;&#39;</span>
 
 <span class="c1"># URL of Devo API, e.g. https://apiv2-us.devo.com/search/query/</span>
 <span class="n">DEVO_API_URL</span> <span class="o">=</span> <span class="s1">&#39;&lt;devo_api_url_here&gt;&#39;</span>
@@ -269,10 +278,10 @@ $<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </sp
 <span class="n">DOMAIN</span> <span class="o">=</span> <span class="s1">&#39;&lt;your_domain_here&gt;&#39;</span>
 
 <span class="c1"># The name of the model</span>
-<span class="n">NAME</span> <span class="o">=</span> <span class="s1">&#39;dga_classifier&#39;</span>
+<span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s1">&#39;dga_classifier&#39;</span>
 
 <span class="c1"># The description of the models</span>
-<span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s1">&#39;DGA domain classifier&#39;</span>
+<span class="n">MODEL_DESCRIPTION</span> <span class="o">=</span> <span class="s1">&#39;DGA domain classifier&#39;</span>
 
 <span class="c1"># The path where model file will be stored</span>
 <span class="n">MODELS_PATH</span> <span class="o">=</span> <span class="s1">&#39;~/models&#39;</span>
@@ -283,10 +292,12 @@ $<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </sp
 <span class="n">VOWELS</span> <span class="o">=</span> <span class="s2">&quot;aeiouAEIOU&quot;</span>
 </pre></div>
 </div>
-<p>We use the <a class="reference external" href="https://docs.h2o.ai/h2o/latest-stable/h2o-py/docs/index.html">h2o</a>
-library to create a model capable of detecting whether a domain is malicious or
-not and this <a class="reference external" href="https://devo-ml-models-public-demos.s3.eu-west-3.amazonaws.com/legit_dga/dataset.csv">dataset</a>
-, which has the form: <em>host;domain;class;subclass.</em></p>
+</section>
+<section id="prepare-the-data">
+<h2>Prepare the data<a class="headerlink" href="#prepare-the-data" title="Permalink to this heading">#</a></h2>
+<p>This <a class="reference external" href="https://devo-ml-models-public-demos.s3.eu-west-3.amazonaws.com/legit_dga/dataset.csv">dataset</a>
+will help us to train our model once it has been built. The dataset has the
+form <code class="docutils literal notranslate"><span class="pre">host;domain;class;subclass</span></code>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>host;domain;class;subclass
 000directory.com.ar;000directory;legit;legit
 000webhost.com;000webhost;legit;legit
@@ -299,13 +310,10 @@ not and this <a class="reference external" href="https://devo-ml-models-public-d
 ...
 </pre></div>
 </div>
-<p>In the dataset preparation we will add the columns <code class="docutils literal notranslate"><span class="pre">length</span></code>, <code class="docutils literal notranslate"><span class="pre">entropy</span></code> and
-<code class="docutils literal notranslate"><span class="pre">vowel_proportion</span></code> for each domain, and also the flag <code class="docutils literal notranslate"><span class="pre">malicious</span></code> indicating
-if it is a DGA domain according to the <code class="docutils literal notranslate"><span class="pre">class</span></code> column value.</p>
-<p>As a result we will have a model saved in a file in <cite>~/models</cite>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h2o</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
-
-<span class="c1"># import dataset</span>
+<p>We will add the columns <code class="docutils literal notranslate"><span class="pre">length</span></code>, <code class="docutils literal notranslate"><span class="pre">entropy</span></code> and <code class="docutils literal notranslate"><span class="pre">vowel_proportion</span></code> for
+each domain, and also the flag <code class="docutils literal notranslate"><span class="pre">malicious</span></code> indicating if it is a DGA domain
+according to the <code class="docutils literal notranslate"><span class="pre">class</span></code> column value.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># import dataset</span>
 <span class="n">domains</span> <span class="o">=</span> <span class="n">h2o</span><span class="o">.</span><span class="n">import_file</span><span class="p">(</span><span class="n">DATASET_URL</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Prepare dataset</span>
@@ -318,12 +326,20 @@ if it is a DGA domain according to the <code class="docutils literal notranslate
 <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;vowel_proportion&#39;</span><span class="p">]</span> <span class="o">/=</span> <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span>
 <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;malicious&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;legit&#39;</span>
 <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;malicious&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;malicious&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">asfactor</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="build-the-model">
+<h2>Build the model<a class="headerlink" href="#build-the-model" title="Permalink to this heading">#</a></h2>
+<p>We use the <a class="reference external" href="https://docs.h2o.ai/h2o/latest-stable/h2o-py/docs/index.html">h2o</a>
+library to create a model capable of detecting whether a domain is malicious.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h2o</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
 
 <span class="c1"># split dataset</span>
 <span class="n">train</span><span class="p">,</span> <span class="n">valid</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">split_frame</span><span class="p">(</span><span class="n">ratios</span><span class="o">=</span><span class="p">[</span><span class="mf">.8</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1234</span><span class="p">)</span>
 
 <span class="c1"># create and train the model</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">H2OGradientBoostingEstimator</span><span class="p">(</span><span class="n">model_id</span><span class="o">=</span><span class="n">NAME</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">H2OGradientBoostingEstimator</span><span class="p">(</span><span class="n">model_id</span><span class="o">=</span><span class="n">MODEL_NAME</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">,</span> <span class="s1">&#39;entropy&#39;</span><span class="p">,</span> <span class="s1">&#39;vowel_proportion&#39;</span><span class="p">],</span>
     <span class="n">y</span><span class="o">=</span><span class="s1">&#39;malicious&#39;</span><span class="p">,</span>
@@ -338,12 +354,6 @@ if it is a DGA domain according to the <code class="docutils literal notranslate
 <span class="n">h2o</span><span class="o">.</span><span class="n">cluster</span><span class="p">()</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The aim of this tutorial is to show the integration of the ML Model
-Manager Client into the machine learning process not the development of
-an optimal and accurate machine learning model.</p>
-</div>
 </section>
 <section id="register-the-model">
 <h2>Register the model<a class="headerlink" href="#register-the-model" title="Permalink to this heading">#</a></h2>
@@ -351,14 +361,14 @@ an optimal and accurate machine learning model.</p>
 Devo platform in order to exploit it. For this we will use the ML Model Manager
 Client.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># create the mlmm client</span>
-<span class="n">mlmm</span> <span class="o">=</span> <span class="n">create_client_from_token</span><span class="p">(</span><span class="n">DEVO_MLMM_URL</span><span class="p">,</span> <span class="n">TOKEN</span><span class="p">)</span>
+<span class="n">mlmm</span> <span class="o">=</span> <span class="n">create_client_from_token</span><span class="p">(</span><span class="n">DEVO_MLMM_URL</span><span class="p">,</span> <span class="n">DEVO_TOKEN</span><span class="p">)</span>
 
 <span class="c1"># register the model</span>
 <span class="n">mlmm</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span>
-    <span class="n">NAME</span><span class="p">,</span>
+    <span class="n">MODEL_NAME</span><span class="p">,</span>
     <span class="n">engines</span><span class="o">.</span><span class="n">H2O</span><span class="p">,</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">MODELS_PATH</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">NAME</span><span class="si">}</span><span class="s2">.zip&quot;</span><span class="p">),</span>
-    <span class="n">description</span><span class="o">=</span><span class="n">DESCRIPTION</span><span class="p">,</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">MODELS_PATH</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">MODEL_NAME</span><span class="si">}</span><span class="s2">.zip&quot;</span><span class="p">),</span>
+    <span class="n">description</span><span class="o">=</span><span class="n">MODEL_DESCRIPTION</span><span class="p">,</span>
     <span class="n">force</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 </pre></div>
@@ -383,7 +393,7 @@ of evaluating machine learning models.</p>
 <span class="s1">  float(length(domain)) as length,</span>
 <span class="s1">  shannonentropy(domain) as entropy,</span>
 <span class="s1">  float(countbyfilter(domain, &quot;</span><span class="si">{</span><span class="n">VOWELS</span><span class="si">}</span><span class="s1">&quot;)) as vowel_proportion,</span>
-<span class="s1">  mlevalmodel(&quot;</span><span class="si">{</span><span class="n">DOMAIN</span><span class="si">}</span><span class="s1">&quot;, &quot;</span><span class="si">{</span><span class="n">NAME</span><span class="si">}</span><span class="s1">&quot;, length, entropy, vowel_proportion) as class</span>
+<span class="s1">  mlevalmodel(&quot;</span><span class="si">{</span><span class="n">DOMAIN</span><span class="si">}</span><span class="s1">&quot;, &quot;</span><span class="si">{</span><span class="n">MODEL_NAME</span><span class="si">}</span><span class="s1">&quot;, length, entropy, vowel_proportion) as class</span>
 <span class="s1">&#39;&#39;&#39;</span>
 </pre></div>
 </div>
@@ -398,7 +408,7 @@ among other features, we can execute queries against the Devo platform easily
 and securely.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a Devo API client</span>
 <span class="n">api</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span>
-    <span class="n">auth</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;token&quot;</span><span class="p">:</span> <span class="n">TOKEN</span><span class="p">},</span>
+    <span class="n">auth</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;token&quot;</span><span class="p">:</span> <span class="n">DEVO_TOKEN</span><span class="p">},</span>
     <span class="n">address</span><span class="o">=</span><span class="n">DEVO_API_URL</span><span class="p">,</span>
     <span class="n">config</span><span class="o">=</span><span class="n">ClientConfig</span><span class="p">(</span>
         <span class="n">response</span><span class="o">=</span><span class="s2">&quot;json/simple/compact&quot;</span><span class="p">,</span>
@@ -477,6 +487,9 @@ to learn more about the Devo Query API.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">DGA domain classifier</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#setup">Setup</a></li>
+<li><a class="reference internal" href="#prepare-the-data">Prepare the data</a></li>
 <li><a class="reference internal" href="#build-the-model">Build the model</a></li>
 <li><a class="reference internal" href="#register-the-model">Register the model</a></li>
 <li><a class="reference internal" href="#classify-domains">Classify domains</a></li>

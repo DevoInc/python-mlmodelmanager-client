@@ -17,9 +17,17 @@ format.
     `The tutorial is available as a Jupyter notebook
     <https://github.com/DevoInc/python-mlmodelmanager-client/blob/main/notebooks/dga-domain-classifier-keras-onnx.ipynb>`_.
 
-Build the model
----------------
+Requirements
+------------
 
+* Python >= 3.7.
+* Devo table ``demo.ecommerce.data``.
+
+It is recommended for convenience to create a virtual environment to run the
+tutorial or use the notebook provided.
+
+Setup
+-----
 
 Let's start by installing the required packages.
 
@@ -55,7 +63,7 @@ Declare some constants for convenience in the code.
 .. code-block::
 
     # A valid Devo access token
-    TOKEN = '<your_token_here>'
+    DEVO_TOKEN = '<your_token_here>'
 
     # URL of Devo API, e.g. https://apiv2-us.devo.com/search/query/
     DEVO_API_URL = '<devo_api_url_here>'
@@ -67,13 +75,13 @@ Declare some constants for convenience in the code.
     DOMAIN = '<your_domain_here>'
 
     # The name of the model
-    NAME = 'dga_classifier_onnx'
+    MODEL_NAME = 'dga_classifier_onnx'
 
     # The description of the models
-    DESCRIPTION = 'DGA domain classifier (Keras-ONNX)'
+    MODEL_DESCRIPTION = 'DGA domain classifier (Keras-ONNX)'
 
     # File to store the onnx model
-    MODEL_FILE = f'{NAME}.onnx'
+    MODEL_FILE = f'{MODEL_NAME}.onnx'
 
     # The URL of a dataset to build the model
     DATASET_URL = "https://devo-ml-models-public-demos.s3.eu-west-3.amazonaws.com/legit_dga/dataset.csv"
@@ -83,6 +91,9 @@ Declare some constants for convenience in the code.
     # fix random seed for reproducibility
     seed = 42
     np.random.seed(seed)
+
+Prepare the data
+----------------
 
 This `dataset
 <https://devo-ml-models-public-demos.s3.eu-west-3.amazonaws.com/legit_dga/dataset.csv>`_
@@ -136,6 +147,9 @@ After preparation our dataset of domains should looks like this.
 
     Be aware that our dataset is a `pandas.DataFrame
     <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_.
+
+Build the model
+---------------
 
 We are now ready to build the model. We will rely on a
 `Keras Sequential model <https://keras.io/guides/sequential_model/>`_ for that.
@@ -225,19 +239,22 @@ You will see the progress of the training in the output, something like this.
     The `Keras framework` is beyond the scope of this tutorial, please, refer
     to `Keras API reference <https://keras.io/api/>`_ to learn more.
 
-Register the model
-------------------
+Transform to ONNX
+-----------------
 
 In order to register the model in Devo we need to transform it to `ONNX` format
 first.
 
 We will use the
 `tf2onnx <https://onnxruntime.ai/docs/tutorials/tf-get-started.html>`_
-tool to convert our `Keras` model to `ONNX`.
+tool to convert our `Keras` model to `ONNX` and save it.
 
 .. code-block::
 
-    tf2onnx.convert.from_keras(model, opset=13, output_path=MODEL_FILE)
+    onnx_model = tf2onnx.convert.from_keras(model, opset=13, output_path=MODEL_FILE)
+
+Register the model
+------------------
 
 Once the model has been transformed and saved, it must be registered on the
 Devo platform in order to exploit it.
@@ -247,14 +264,14 @@ We will use the ML Model Manager Client for that.
 .. code-block::
 
     # create the mlmm client
-    mlmm = create_client_from_token(DEVO_MLMM_URL, TOKEN)
+    mlmm = create_client_from_token(DEVO_MLMM_URL, DEVO_TOKEN)
 
     # register the model
     mlmm.add_model(
-        NAME,
+        MODEL_NAME,
         engines.ONNX,
         MODEL_FILE,
-        description=DESCRIPTION,
+        description=MODEL_DESCRIPTION,
         force=True
     )
 
@@ -285,7 +302,7 @@ A query that might be worthwhile would be something like this.
       float(length(domain)) as length,
       shannonentropy(domain) as entropy,
       float(countbyfilter(domain, "{VOWELS}")) as vowel_proportion,
-      at(mlevalmodel("{DOMAIN}", "{NAME}", [float4(length), float4(vowel_proportion)]),0) as res,
+      at(mlevalmodel("{DOMAIN}", "{MODEL_NAME}", [float4(length), float4(vowel_proportion)]),0) as res,
       ifthenelse(res>0.5, "false", "true") as isMalicious
     '''
 
@@ -306,7 +323,7 @@ and securely.
 
     # create a Devo API client
     api = Client(
-        auth={"token": TOKEN},
+        auth={"token": DEVO_TOKEN},
         address=DEVO_API_URL,
         config=ClientConfig(
             response="json/simple/compact",
