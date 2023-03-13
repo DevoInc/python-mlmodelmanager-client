@@ -27,8 +27,17 @@ evaluate and classify in real time the domains in the table using a query.
     `The tutorial is available as a Jupyter notebook
     <https://github.com/DevoInc/python-mlmodelmanager-client/blob/main/notebooks/dga-domain-classifier.ipynb>`_.
 
-Build the model
----------------
+Requirements
+------------
+
+* Python >= 3.7.
+* Devo table ``demo.ecommerce.data``.
+
+It is recommended for convenience to create a virtual environment to run the
+tutorial or use the notebook provided.
+
+Setup
+-----
 
 Let's start by installing the required packages.
 
@@ -54,7 +63,7 @@ Declare some constants for convenience in the code.
 .. code-block::
 
     # A valid Devo access token
-    TOKEN = '<your_token_here>'
+    DEVO_TOKEN = '<your_token_here>'
 
     # URL of Devo API, e.g. https://apiv2-us.devo.com/search/query/
     DEVO_API_URL = '<devo_api_url_here>'
@@ -66,10 +75,10 @@ Declare some constants for convenience in the code.
     DOMAIN = '<your_domain_here>'
 
     # The name of the model
-    NAME = 'dga_classifier'
+    MODEL_NAME = 'dga_classifier'
 
     # The description of the models
-    DESCRIPTION = 'DGA domain classifier'
+    MODEL_DESCRIPTION = 'DGA domain classifier'
 
     # The path where model file will be stored
     MODELS_PATH = '~/models'
@@ -79,11 +88,13 @@ Declare some constants for convenience in the code.
 
     VOWELS = "aeiouAEIOU"
 
-We use the `h2o <https://docs.h2o.ai/h2o/latest-stable/h2o-py/docs/index.html>`_
-library to create a model capable of detecting whether a domain is malicious or
-not and this `dataset
+Prepare the data
+----------------
+
+This `dataset
 <https://devo-ml-models-public-demos.s3.eu-west-3.amazonaws.com/legit_dga/dataset.csv>`_
-, which has the form: *host;domain;class;subclass.*
+will help us to train our model once it has been built. The dataset has the
+form ``host;domain;class;subclass``.
 
 .. code-block:: text
 
@@ -98,15 +109,11 @@ not and this `dataset
     100bestbuy.com;100bestbuy;legit;legit
     ...
 
-In the dataset preparation we will add the columns ``length``, ``entropy`` and
-``vowel_proportion`` for each domain, and also the flag ``malicious`` indicating
-if it is a DGA domain according to the ``class`` column value.
-
-As a result we will have a model saved in a file in `~/models`.
+We will add the columns ``length``, ``entropy`` and ``vowel_proportion`` for
+each domain, and also the flag ``malicious`` indicating if it is a DGA domain
+according to the ``class`` column value.
 
 .. code-block::
-
-    h2o.init()
 
     # import dataset
     domains = h2o.import_file(DATASET_URL, header=1)
@@ -122,11 +129,21 @@ As a result we will have a model saved in a file in `~/models`.
     domains['malicious'] = domains['class'] != 'legit'
     domains['malicious'] = domains['malicious'].asfactor()
 
+Build the model
+---------------
+
+We use the `h2o <https://docs.h2o.ai/h2o/latest-stable/h2o-py/docs/index.html>`_
+library to create a model capable of detecting whether a domain is malicious.
+
+.. code-block::
+
+    h2o.init()
+
     # split dataset
     train, valid = domains.split_frame(ratios=[.8], seed=1234)
 
     # create and train the model
-    model = H2OGradientBoostingEstimator(model_id=NAME)
+    model = H2OGradientBoostingEstimator(model_id=MODEL_NAME)
     model.train(
         x=['length', 'entropy', 'vowel_proportion'],
         y='malicious',
@@ -140,12 +157,6 @@ As a result we will have a model saved in a file in `~/models`.
 
     h2o.cluster().shutdown()
 
-.. note::
-
-    The aim of this tutorial is to show the integration of the ML Model
-    Manager Client into the machine learning process not the development of
-    an optimal and accurate machine learning model.
-
 Register the model
 ------------------
 
@@ -156,14 +167,14 @@ Client.
 .. code-block::
 
     # create the mlmm client
-    mlmm = create_client_from_token(DEVO_MLMM_URL, TOKEN)
+    mlmm = create_client_from_token(DEVO_MLMM_URL, DEVO_TOKEN)
 
     # register the model
     mlmm.add_model(
-        NAME,
+        MODEL_NAME,
         engines.H2O,
-        os.path.join(MODELS_PATH, f"{NAME}.zip"),
-        description=DESCRIPTION,
+        os.path.join(MODELS_PATH, f"{MODEL_NAME}.zip"),
+        description=MODEL_DESCRIPTION,
         force=True
     )
 
@@ -193,7 +204,7 @@ A query that might be worthwhile would be something like this.
       float(length(domain)) as length,
       shannonentropy(domain) as entropy,
       float(countbyfilter(domain, "{VOWELS}")) as vowel_proportion,
-      mlevalmodel("{DOMAIN}", "{NAME}", length, entropy, vowel_proportion) as class
+      mlevalmodel("{DOMAIN}", "{MODEL_NAME}", length, entropy, vowel_proportion) as class
     '''
 
 .. note::
@@ -211,7 +222,7 @@ and securely.
 
     # create a Devo API client
     api = Client(
-        auth={"token": TOKEN},
+        auth={"token": DEVO_TOKEN},
         address=DEVO_API_URL,
         config=ClientConfig(
             response="json/simple/compact",

@@ -1,5 +1,5 @@
-Ecommerce Clustering
-====================
+Entity classification (kmeans-ONNX)
+===================================
 
 This tutorial shows how to register and use a ML model in
 `ONNX <https://onnx.ai/>`_ format in the `Devo <https://www.devo.com>`_
@@ -20,10 +20,19 @@ using the Devo query engine.
 .. note::
 
     `The tutorial is available as a Jupyter notebook
-    <https://github.com/DevoInc/python-mlmodelmanager-client/blob/main/notebooks/ecommerce_clustering.ipynb>`_.
+    <https://github.com/DevoInc/python-mlmodelmanager-client/blob/main/notebooks/entity-classification-kmeans-onnx.ipynb>`_.
 
-Build the model
----------------
+Requirements
+------------
+
+* Python >= 3.7.
+* Devo table ``demo.ecommerce.data``.
+
+It is recommended for convenience to create a virtual environment to run the
+tutorial or use the notebook provided.
+
+Setup
+-----
 
 Let's start by installing the required packages.
 
@@ -57,7 +66,7 @@ Declare some constants for convenience in the code.
 .. code-block::
 
     # A valid Devo access token
-    TOKEN = '<your_token_here>'
+    DEVO_TOKEN = '<your_token_here>'
 
     # URL of Devo API, e.g. https://apiv2-us.devo.com/search/query/
     DEVO_API_URL = '<devo_api_url_here>'
@@ -69,13 +78,16 @@ Declare some constants for convenience in the code.
     DOMAIN = '<your_domain_here>'
 
     # The name of the model
-    NAME = 'ecommerce_cluster'
+    MODEL_NAME = 'entity_classification_ip'
 
     # The description of the models
-    DESCRIPTION = 'Demo of ecommerce clustering'
+    MODEL_DESCRIPTION = 'Demo of entity classification ip'
 
     # File to store the onnx model
-    MODEL_FILE = f'{NAME}.onnx'
+    MODEL_FILE = f'{MODEL_NAME}.onnx'
+
+Build the model
+---------------
 
 Our model will classify the IPs in the *demo.ecommerce* table into three
 supposed interest groups: IA, UA, MU.
@@ -101,7 +113,7 @@ and securely.
 
     # create a Devo API client
     api = Client(
-        auth={"token": TOKEN},
+        auth={"token": DEVO_TOKEN},
         address=DEVO_API_URL,
         config=ClientConfig(
             response="json/simple/compact",
@@ -176,6 +188,9 @@ class.
         random_state=42
     ).fit(train_data)
 
+Transform to ONNX
+-----------------
+
 Let's now transform the model to ``ONNX`` format.
 
 For that we use the
@@ -184,7 +199,7 @@ function of the `sklearn-onnx <https://onnx.ai/sklearn-onnx/index.html>`_ librar
 
 .. code-block::
 
-    model_onnx = to_onnx(
+    onnx_model = to_onnx(
         model,
         train_data.astype(np.float32),
         target_opset=13,
@@ -196,10 +211,10 @@ properly consume it in the Devo platform.
 .. code-block::
 
     # Output: scores (discarded)
-    _ = model_onnx.graph.output.pop(1)
+    _ = onnx_model.graph.output.pop(1)
 
     # Output: label (discarded)
-    _ = model_onnx.graph.output.pop(0)
+    _ = onnx_model.graph.output.pop(0)
 
     # Last output should be float to work in Devo
     cast_node = helper.make_node(
@@ -209,8 +224,8 @@ properly consume it in the Devo platform.
         name='output_label_cast',
         to=TensorProto.FLOAT,
     )
-    model_onnx.graph.node.append(cast_node)
-    model_onnx.graph.output.append(
+    onnx_model.graph.node.append(cast_node)
+    onnx_model.graph.output.append(
         helper.make_tensor_value_info(
             name='label_cast',
             elem_type=TensorProto.FLOAT,
@@ -221,9 +236,9 @@ properly consume it in the Devo platform.
     # Expand last dimension, so it has two dimensions: batch and item
     # It's required only for the kmeans in sklearn, other algorithms
     # like linear regression do not require this conversion
-    model_onnx = onnx.compose.expand_out_dim(model_onnx, dim_idx=1)
-    model_onnx = update_model_dims.update_inputs_outputs_dims(
-        model_onnx,
+    onnx_model = onnx.compose.expand_out_dim(onnx_model, dim_idx=1)
+    onnx_model = update_model_dims.update_inputs_outputs_dims(
+        onnx_model,
         {'X': [-1, 5]},
         {'label_cast': [-1, 1]},
     )
@@ -233,7 +248,7 @@ Finally we save the model in a file.
 .. code-block::
 
     with open(MODEL_FILE, 'wb') as fp:
-        fp.write(model_onnx.SerializeToString())
+        fp.write(onnx_model.SerializeToString())
 
 Register the model
 ------------------
@@ -245,14 +260,14 @@ Client.
 .. code-block::
 
     # create the mlmm client
-    mlmm = create_client_from_token(DEVO_MLMM_URL, TOKEN)
+    mlmm = create_client_from_token(DEVO_MLMM_URL, DEVO_TOKEN)
 
     # register the model
     mlmm.add_model(
-        NAME,
+        MODEL_NAME,
         engines.ONNX,
         MODEL_FILE,
-        description=DESCRIPTION,
+        description=MODEL_DESCRIPTION,
         force=True
     )
 
@@ -283,7 +298,7 @@ A query that might be worthwhile would be something like this.
         float4(avg(bytesTransferred)) as bytestransferred,
         at(mlevalmodel(
             "{DOMAIN}",
-            "{NAME}",
+            "{MODEL_NAME}",
             [unique_hours, unique_mins, unique_seconds, unique_user_agents, bytestransferred]), 0) as label,
         ifthenelse(label = 0.0, "IU", ifthenelse(label = 1.0, "AU", "MU")) as type
     '''
