@@ -1,0 +1,568 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="API Reference" href="../api_reference/index.html" /><link rel="prev" title="Entity classification (kmeans-ONNX)" href="entity-classification-kmeans-onnx.html" />
+
+    <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+        <title>Entity classification with Flow - ML Model Manager Client documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">ML Model Manager Client  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">ML Model Manager Client  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../user_guide/index.html">User’s Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/client-object.html">Client Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/functions-facade.html">Functions Facade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/authentication.html">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/downloaders.html">Downloaders</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dga-domain-classifier.html">DGA domain classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dga-domain-classifier-keras-onnx.html">DGA domain classifier (Keras-ONNX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dga-domain-scoring-gbm-onnx.html">DGA domain scoring (GBM-ONNX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entity-classification-kmeans-onnx.html">Entity classification (kmeans-ONNX)</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Entity classification with Flow</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_reference/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/modelmanager.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.api</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/auth.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.auth</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/downloader.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.downloader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/engines.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.engines</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/error.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.error</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/profile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.profile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/validator.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.validator</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="entity-classification-with-flow">
+<h1>Entity classification with Flow<a class="headerlink" href="#entity-classification-with-flow" title="Permalink to this heading">#</a></h1>
+<p>This tutorial shows how to evaluate a machine learning model using the Devo
+Platform’s very own correlation engine:
+<a class="reference external" href="https://docs.devo.com/space/latest/95213164/Flow">Flow</a>.</p>
+<p>We will use the model developed in the tutorial
+<a class="reference internal" href="entity-classification-kmeans-onnx.html#entity-classification-kmeans-onnx"><span class="std std-ref">Entity classification (kmeans-ONNX)</span></a>
+to demonstrate how to classify new data automatically with the desired
+periodicity.</p>
+<p>We will also learn how to subscribe to updates of the model itself in order
+to have the latest improvements of its training.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Devo table <code class="docutils literal notranslate"><span class="pre">demo.ecommerce.data</span></code>.</p></li>
+<li><p>ML model from the tutorial
+<a class="reference internal" href="entity-classification-kmeans-onnx.html#entity-classification-kmeans-onnx"><span class="std std-ref">entity classification</span></a>
+registered in the <a class="reference external" href="https://www.devo.com">Devo</a> platform.</p></li>
+</ul>
+</section>
+<section id="create-the-flow">
+<h2>Create the Flow<a class="headerlink" href="#create-the-flow" title="Permalink to this heading">#</a></h2>
+<p>One of the uses of <cite>Flow</cite> is the transformation and manipulation of data
+through a series of defined steps. The output of one step is the input to the
+next step(s) and so on. In this way we can define a complex data flow to achieve
+a desired goal. The set of steps to perform a task is known as <cite>context</cite>.</p>
+<p>Each of steps in a context is represented by a <a class="reference external" href="https://docs.devo.com/space/latest/95213765">Unit</a>.
+<cite>Flow</cite> provides a wide variety of units to perform lot of individual subtasks.</p>
+<p>A relevant unit for our use case is the
+<a class="reference external" href="https://docs.devo.com/space/latest/95214962/ML+Single+Model+Evaluator">ML Single Model Evaluator</a>
+which is capable of evaluating an ML model, so we need to create a context that
+includes this unit, in addition to others.</p>
+<p>This is the layout of the context proposed for our task.</p>
+<img alt="../_images/EvalModelTemplate.png" src="../_images/EvalModelTemplate.png" />
+<p>We can
+<a class="reference external" href="https://docs.devo.com/space/latest/95213200/Creating+a+Flow">create the context from scratch</a>,
+but there is an easier way to do it if we have the context specification, which
+is our case.</p>
+<p>The <a class="reference download internal" download="" href="../_downloads/f4a57bc5f5d484cd0dfb63ce3e906563/EvalModelTemplate.json"><code class="xref download docutils literal notranslate"><span class="pre">EvalModelTemplate.json</span></code></a>
+specification contains all the specification to create the suitable context.
+We can import the context from <code class="docutils literal notranslate"><span class="pre">Flow</span> <span class="pre">welcome</span> <span class="pre">page</span></code> of <cite>Flow</cite> application
+using the option <code class="docutils literal notranslate"><span class="pre">Import</span> <span class="pre">from</span> <span class="pre">json</span></code>, so download it and import it.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">EvalModelTemplate.json</span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;EvalModelTemplate&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;app.Context&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;templateFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;%mono&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;loggedItems&quot;</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="s2">&quot;variableConf&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;variables&quot;</span><span class="p">:</span> <span class="p">[{</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;d310c38c-pa41-iebc-9cfa-d52483cffdbb&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;OUT_TABLE&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Devo table to write to.&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;my.app.evalmodel.demo&quot;</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The specification of a context is usually very long, here it has been
+shortened for tutorial readability.</p>
+</div>
+<p>At this point we should have a ready-to-use context that reads data from the
+<code class="docutils literal notranslate"><span class="pre">demo.ecommerce.data</span></code> table, evaluates it through an ML model and writes the
+results to the <code class="docutils literal notranslate"><span class="pre">my.app.evalmodel.demo</span></code> table, all just out of the box
+importing a context specification.</p>
+<p>But a context does not have to be static, it can be adjusted by variables and
+its units are also configurable, let’s see how.</p>
+</section>
+<section id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this heading">#</a></h2>
+<p>Although the context is ready out of the box after import, we can adjust it by
+means of a set of variables</p>
+<p>From <code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">\</span> <span class="pre">Variables</span></code> option of the main menu of <cite>Flow</cite> application you
+can tune the variable values.</p>
+<div class="table-wrapper docutils container" id="id3">
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Variable defaults</span><a class="headerlink" href="#id3" title="Permalink to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>NAME</p></th>
+<th class="head"><p>TYPE</p></th>
+<th class="head"><p>DEFINITION</p></th>
+<th class="head"><p>DEFAULT VALUE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>EVERY</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td><p>Cron expression to define how often queries will be launched</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">?</span> <span class="pre">*</span> <span class="pre">*</span> <span class="pre">*</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>QUERY_DURATION</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Long</span></code></p></td>
+<td><p>Length in milliseconds of the period the query should consider</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">86400000</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>QUERY_MODULE</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Integer</span></code></p></td>
+<td><p>Number of chunks to split the query</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">24</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>QUERY_COLUMN</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td><p>Name of the query column used to split the query into chunks</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">clientIpAddress</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>OUT_TABLE</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td><p>Name of the table where results will be written</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">my.app.evalmodel.demo</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>If you want to change the <code class="docutils literal notranslate"><span class="pre">EVERY</span></code> variable be aware that you must change the
+<code class="docutils literal notranslate"><span class="pre">QUERY_DURATION</span></code> variable accordingly. For instance, if you want to run the
+query every 2 hours, <code class="docutils literal notranslate"><span class="pre">QUERY_DURATION</span></code> should be <code class="docutils literal notranslate"><span class="pre">7200000</span></code>
+<cite>(2h * 60min/h * 60s/min * 1000ms/s)</cite>.</p>
+</section>
+<section id="units-overview">
+<h2>Units overview<a class="headerlink" href="#units-overview" title="Permalink to this heading">#</a></h2>
+<p>Let’s see the units of the layout.</p>
+<ol class="arabic">
+<li><div class="line-block">
+<div class="line"><strong>EveryX</strong> [<a class="reference external" href="https://docs.devo.com/space/latest/95214759/Scheduler">event.Scheduler</a>]</div>
+</div>
+<div class="line-block">
+<div class="line">This unit is configured to start working when the context is run.
+Everytime this unit sends an event, queries will be launched. To change
+how often queries should be launched, you can change the value of the Flow
+variable <code class="docutils literal notranslate"><span class="pre">EVERY</span></code>. By default, it is configured to send an event everyday
+at midnight.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><strong>SetFromAndToDates</strong> [<a class="reference external" href="https://docs.devo.com/space/latest/95214080/Map">core.Map</a>]</div>
+<div class="line">This unit uses the date generated in the previous unit to set the <code class="docutils literal notranslate"><span class="pre">from</span></code>
+and <code class="docutils literal notranslate"><span class="pre">to</span></code> timestamps for the query. The variable <code class="docutils literal notranslate"><span class="pre">QUERY_DURATION</span></code> sets
+the <code class="docutils literal notranslate"><span class="pre">from</span></code> timestamp. By default, it is configured to 24h.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><strong>MultiplyByNToSplitQuery</strong> [<a class="reference external" href="https://docs.devo.com/space/latest/95214715/Repeater">event.Repeater</a>]</div>
+<div class="line">This unit generates <code class="docutils literal notranslate"><span class="pre">N</span></code> events for every event received, all of them
+with the same content except for a <code class="docutils literal notranslate"><span class="pre">counter</span></code>. We will use that counter
+to split the results of the query when there are too many values.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><strong>QueryData</strong> [<a class="reference external" href="https://docs.devo.com/space/latest/95214466/Devo+Full+Query">devo.DevoFullQuery</a>]</div>
+<div class="line">This is the unit that gets data from the table <code class="docutils literal notranslate"><span class="pre">demo.ecommerce.data</span></code>
+using the Query Engine and the dates calculated in the <strong>SetFromAndToDates</strong>
+unit. We added a module operation to split the query into smaller queries
+just in case there are too many results to handle in one go.</div>
+</div>
+<div class="line-block">
+<div class="line">Note that this unit is connected to the <strong>ModelEvaluator</strong> unit that
+evaluates the input with a machine learning model, therefore the output of
+the unit must match the input fields definition of the ML model, i.e., same
+name and type. In our case, the model expects an array of five <code class="docutils literal notranslate"><span class="pre">float4</span></code>
+elements named <code class="docutils literal notranslate"><span class="pre">field_0</span></code>, so we built the query with that output:</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">QueryData::General::Query</span><a class="headerlink" href="#id4" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>select ? as counter
+from demo.ecommerce.data where isnotnull(clientIpAddress)
+where (abs(hash(#{QUERY_COLUMN}))) %% #{QUERY_MODULE} = counter
+select
+    hour(eventdate) as hour,
+    minute(eventdate) as minute,
+    second(eventdate) as second,
+    clientIpAddress,
+    userAgent
+group every 8h by clientIpAddress
+<span class="hll">select
+</span><span class="hll">    str(clientIpAddress) as sourceIp,
+</span><span class="hll">    float4(size(collectcompact(hour))) as unique_hours,
+</span><span class="hll">    float4(size(collectcompact(minute))) as unique_mins,
+</span><span class="hll">    float4(size(collectcompact(second))) as unique_seconds,
+</span><span class="hll">    float4(size(collectcompact(userAgent))) as unique_user_agents,
+</span><span class="hll">    float4(avg(bytesTransferred)) as bytestransferred,
+</span><span class="hll">    [unique_hours, unique_mins, unique_seconds, unique_user_agents, bytestransferred] as field_0
+</span></pre></div>
+</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><strong>CheckModelUpdates</strong> [<a class="reference external" href="https://docs.devo.com/space/latest/95215021/ML+Update+Notifier">ml.MlUpdateNotifier</a>]</div>
+<div class="line">This unit keeps your ML model updated. If you upload a new version of your
+model keeping the name, your context will refresh the model image to start
+using the new one.</div>
+</div>
+<div class="line-block">
+<div class="line">If you do not plan to update your model ever, you can remove this unit.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><strong>ModelEvaluator</strong> [<a class="reference external" href="https://docs.devo.com/space/latest/95214962/ML+Single+Model+Evaluator">ml.MlSingleModelEval</a>]</div>
+<div class="line">This unit evaluates the specified model with the input data and writes the
+result in a new field with the specified output name.</div>
+</div>
+<div class="line-block">
+<div class="line">The unit was pre-configured to use a model named <code class="docutils literal notranslate"><span class="pre">entity_classification_ip</span></code>,
+which is the name of the model built in the
+<a class="reference internal" href="entity-classification-kmeans-onnx.html#entity-classification-kmeans-onnx"><span class="std std-ref">entity classification</span></a>
+tutorial. You can change the model to use in the <code class="docutils literal notranslate"><span class="pre">Model</span> <span class="pre">Name</span></code> parameter
+of the unit, but note that you must update the query accordingly to match
+the fields of both.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><strong>FormatEvents</strong> [<a class="reference external" href="https://docs.devo.com/space/latest/95214080/Map">core.Map</a>]</div>
+<div class="line">This unit <em>adds/removes/reformats</em> fields to get an event that fits the
+expected format in the output table.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><strong>InjectResults</strong> [<a class="reference external" href="https://docs.devo.com/space/latest/95214553/Devo+Sink">devo.DevoSink</a>]</div>
+<div class="line">Writes the enriched events back to Devo to <code class="docutils literal notranslate"><span class="pre">OUT_TABLE</span></code> table, defaults
+to <code class="docutils literal notranslate"><span class="pre">my.app.evalmodel.demo</span></code>.</div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Refer to <a class="reference external" href="https://docs.devo.com/space/latest/95213164/Flow">Flow documentation</a>
+to learn more about Flow and their units.</p>
+</div>
+</section>
+<section id="remove-query-splitting">
+<h2>Remove query splitting<a class="headerlink" href="#remove-query-splitting" title="Permalink to this heading">#</a></h2>
+<p>In this tutorial we split the query into N smaller queries which is a good
+approach if you expect a large amounts of data. if it is not the case you can
+remove the splitting.</p>
+<p>To do so in the <strong>QueryData</strong> unit remove the <code class="docutils literal notranslate"><span class="pre">counter</span></code> in <cite>Parameters</cite>
+section and modify the query by removing these lines:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">QueryData::General::Query</span><a class="headerlink" href="#id5" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="hll">select ? as counter
+</span>from demo.ecommerce.data where isnotnull(clientIpAddress)
+<span class="hll">where (abs(hash(#{QUERY_COLUMN}))) %% #{QUERY_MODULE} = counter
+</span>select
+    hour(eventdate) as hour,
+    minute(eventdate) as minute,
+    second(eventdate) as second,
+    clientIpAddress,
+    userAgent
+group every 8h by clientIpAddress
+select
+    str(clientIpAddress) as sourceIp,
+    float4(size(collectcompact(hour))) as unique_hours,
+    float4(size(collectcompact(minute))) as unique_mins,
+    float4(size(collectcompact(second))) as unique_seconds,
+    float4(size(collectcompact(userAgent))) as unique_user_agents,
+    float4(avg(bytesTransferred)) as bytestransferred,
+    [unique_hours, unique_mins, unique_seconds, unique_user_agents, bytestransferred] as field_0
+</pre></div>
+</div>
+</div>
+<p>Without spliting you can still adjust the frequency of the query by changing the
+<code class="docutils literal notranslate"><span class="pre">EVERY</span></code> and <code class="docutils literal notranslate"><span class="pre">QUERY_DURATION</span></code> variables according to your needs.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../api_reference/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">API Reference</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="entity-classification-kmeans-onnx.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Entity classification (kmeans-ONNX)</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, Devo ML Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Entity classification with Flow</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#create-the-flow">Create the Flow</a></li>
+<li><a class="reference internal" href="#variables">Variables</a></li>
+<li><a class="reference internal" href="#units-overview">Units overview</a></li>
+<li><a class="reference internal" href="#remove-query-splitting">Remove query splitting</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    </body>
+</html>
