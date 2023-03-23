@@ -12,3 +12,4 @@ Manager Client in the process of development a ML model.
     dga-domain-classifier-keras-onnx
     dga-domain-scoring-gbm-onnx
     entity-classification-kmeans-onnx
+    entity-classification-flow
