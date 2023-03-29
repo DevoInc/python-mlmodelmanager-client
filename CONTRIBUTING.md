@@ -29,11 +29,13 @@ The process to modify one package or script is the next:
 3. Add to the `CHANGELOG.md`, in 
 [`Unreleased`](#How_can_I_minimize_the_effort_required?) the tasks 
 that you are going to take or are carrying out to be able to review at a quick 
-glance the objective of the branch.
+glance the objective of the branch
 4. Make your awesome code
 5. Never forget to **change the changelog**.  
-4.1 [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-6. Create a Pull Request to master with correct version and tests passed.
+5.1 [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+6. Create a Pull Request to master with correct version and tests passed
+7. After reviewed, if everything goes fine it will be merged by one of the admins of the repository, if not back to step 4
+8. It is a task for the admin to generate a [Release](https://github.com/DevoInc/python-mlmodelmanager-client/releases) so that the project gets updated in [PyPi](https://pypi.org/project/devo-mlmodelmanager/)
 
 
 ## Keep a CHANGELOG
