@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="devo_ml.modelmanager.auth" href="auth.html" /><link rel="prev" title="devo_ml.modelmanager" href="modelmanager.html" />
 
-    <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+    <!-- Generated with Sphinx 6.2.1 and Furo 2022.12.07 -->
         <title>devo_ml.modelmanager.api - ML Model Manager Client documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
@@ -219,7 +219,7 @@
         <article role="main">
           <section id="module-devo_ml.modelmanager.api">
 <span id="devo-ml-modelmanager-api"></span><h1><a class="reference internal" href="#module-devo_ml.modelmanager.api" title="devo_ml.modelmanager.api"><code class="xref py py-mod docutils literal notranslate"><span class="pre">devo_ml.modelmanager.api</span></code></a><a class="headerlink" href="#module-devo_ml.modelmanager.api" title="Permalink to this heading">#</a></h1>
-<p>Low-level HTTP API Rest access in a <a class="reference external" href="https://requests.readthedocs.io/en/latest/" title="(in Requests v2.28.2)"><span class="xref std std-doc">Requests</span></a>
+<p>Low-level HTTP API Rest access in a <a class="reference external" href="https://requests.readthedocs.io/en/latest/" title="(in Requests v2.31.0)"><span class="xref std std-doc">Requests</span></a>
 library wrapper.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="devo_ml.modelmanager.api.decode_response">
@@ -227,7 +227,7 @@ library wrapper.</p>
 <dd><p>Decodes a requests response to json.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>response</strong> (<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.Response" title="(in Requests v2.28.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a>) – The requests response</p>
+<dd class="field-odd"><p><strong>response</strong> (<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.Response" title="(in Requests v2.31.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a>) – The requests response</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
@@ -268,7 +268,7 @@ the error when possible.</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="devo_ml.modelmanager.api.Api">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/devo_ml/modelmanager/api.html#Api"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#devo_ml.modelmanager.api.Api" title="Permalink to this definition">#</a></dt>
-<dd><p>Low level api calls based on <a class="reference external" href="https://requests.readthedocs.io/en/latest/" title="(in Requests v2.28.2)"><span class="xref std std-doc">Requests</span></a> lib.</p>
+<dd><p>Low level api calls based on <a class="reference external" href="https://requests.readthedocs.io/en/latest/" title="(in Requests v2.31.0)"><span class="xref std std-doc">Requests</span></a> lib.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="devo_ml.modelmanager.api.Api.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/devo_ml/modelmanager/api.html#Api.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#devo_ml.modelmanager.api.Api.__init__" title="Permalink to this definition">#</a></dt>
@@ -276,7 +276,7 @@ the error when possible.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>auth</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>], <a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.28.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>]]) – The authentication to use</p></li>
+<li><p><strong>auth</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.31.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>], <a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.PreparedRequest" title="(in Requests v2.31.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreparedRequest</span></code></a>]]) – The authentication to use</p></li>
 <li><p><strong>kwargs</strong> – Options to the underlying requests</p></li>
 </ul>
 </dd>
@@ -333,10 +333,10 @@ object.</p></li>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="error.html#devo_ml.modelmanager.error.ModelManagerError" title="devo_ml.modelmanager.error.ModelManagerError"><strong>ModelManagerError</strong></a> – if any
-<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.RequestException" title="(in Requests v2.28.2)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RequestException</span></code></a>.</p>
+<a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.RequestException" title="(in Requests v2.31.0)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RequestException</span></code></a>.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.Response" title="(in Requests v2.28.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.Response" title="(in Requests v2.31.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Request response</p>

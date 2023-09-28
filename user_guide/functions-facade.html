@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Authentication" href="authentication.html" /><link rel="prev" title="Client Object" href="client-object.html" />
 
-    <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+    <!-- Generated with Sphinx 6.2.1 and Furo 2022.12.07 -->
         <title>Functions Facade - ML Model Manager Client documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
@@ -229,7 +229,7 @@ client object and allow operations to be performed in a single call.</p>
 <h2><a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.add_model" title="devo_ml.modelmanager.add_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_model(...)</span></code></a><a class="headerlink" href="#add-model" title="Permalink to this heading">#</a></h2>
 <p>Allows you to create a model.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager</span> <span class="kn">import</span> <span class="n">add_model</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">add_model</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s2">&quot;http://localhost&quot;</span><span class="p">,</span>                         <span class="c1"># url</span>
 <span class="gp">... </span>    <span class="s2">&quot;8a3vf98ai28sar1234lkj2l43td6f89a&quot;</span><span class="p">,</span>         <span class="c1"># token</span>
@@ -238,7 +238,7 @@ client object and allow operations to be performed in a single call.</p>
 <span class="gp">... </span>    <span class="s2">&quot;~/models/pokemon.onnx&quot;</span><span class="p">,</span>                    <span class="c1"># model file</span>
 <span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A funny Pokemon prediction&quot;</span>
 <span class="gp">... </span><span class="p">)</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
 <p>If the model you are trying to add already exists in the system, a
@@ -250,7 +250,7 @@ error will be thrown.</p>
 <h2><a class="reference internal" href="../api_reference/modelmanager.html#devo_ml.modelmanager.get_model" title="devo_ml.modelmanager.get_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_model(...)</span></code></a><a class="headerlink" href="#get-model" title="Permalink to this heading">#</a></h2>
 <p>Allows you to retrieve model.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager</span> <span class="kn">import</span> <span class="n">get_model</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_model</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s2">&quot;http://localhost&quot;</span><span class="p">,</span>                         <span class="c1"># url</span>
 <span class="gp">... </span>    <span class="s2">&quot;8a3vf98ai28sar1234lkj2l43td6f89a&quot;</span><span class="p">,</span>         <span class="c1"># token</span>
@@ -264,7 +264,7 @@ error will be thrown.</p>
 <span class="go">   &#39;description&#39;: &#39;A funny Pokemon prediction&#39;,</span>
 <span class="go">   ...</span>
 <span class="go">}</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
 <p>The parameter <cite>download_path</cite> indicates that we want download the model file,
@@ -281,7 +281,7 @@ error will be thrown.</p>
 throw an error if the model doesn’t exists. It is a convenient way to get the
 model data without the need of catching errors.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager</span> <span class="kn">import</span> <span class="n">find_model</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">find_model</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s2">&quot;http://localhost&quot;</span><span class="p">,</span>                         <span class="c1"># url</span>
 <span class="gp">... </span>    <span class="s2">&quot;8a3vf98ai28sar1234lkj2l43td6f89a&quot;</span><span class="p">,</span>         <span class="c1"># token</span>
@@ -295,7 +295,7 @@ model data without the need of catching errors.</p>
 <span class="go">   &#39;description&#39;: &#39;A funny Pokemon prediction&#39;,</span>
 <span class="go">   ...</span>
 <span class="go">}</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
 </section>
@@ -304,7 +304,7 @@ model data without the need of catching errors.</p>
 <p>Allows you retrieve a list of all the models in the system. Note that it doesn’t
 allow downloading model files.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">devo_ml.modelmanager</span> <span class="kn">import</span> <span class="n">get_models</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_models</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s2">&quot;http://localhost&quot;</span><span class="p">,</span>                         <span class="c1"># url</span>
 <span class="gp">... </span>    <span class="s2">&quot;8a3vf98ai28sar1234lkj2l43td6f89a&quot;</span><span class="p">,</span>         <span class="c1"># token</span>
@@ -325,7 +325,7 @@ allow downloading model files.</p>
 <span class="go">    }, {</span>
 <span class="go">    ...</span>
 <span class="go">]</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
 <div class="admonition note">
